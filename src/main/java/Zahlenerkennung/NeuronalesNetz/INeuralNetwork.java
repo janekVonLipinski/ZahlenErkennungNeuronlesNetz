@@ -1,7 +1,10 @@
 package Zahlenerkennung.NeuronalesNetz;
 
+import Zahlenerkennung.Model.Bild;
+
 public interface INeuralNetwork {
 
     void save();
-    verarbeite(Bild bild);
+    void readWeights();
+    void verarbeite();
 }
