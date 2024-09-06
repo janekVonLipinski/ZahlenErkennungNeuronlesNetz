@@ -1,18 +1,48 @@
 package Zahlenerkennung.NeuronalesNetz.Netz;
 
-import Matrizen.IMatrix;
+import Vektor.IVektor;
+import Vektor.Vektor;
+import Zahlenerkennung.NeuronalesNetz.INeuralNetwork;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.LayerConnection;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.IActivationFunction;
 
+import java.util.Arrays;
 import java.util.List;
 
-public class NeuralNetwork {
+public class NeuralNetwork implements INeuralNetwork {
 
-    private final List<LayerConnection> connections;
+    private final List<LayerConnection> weights;
     private final IActivationFunction activationFunction;
 
-    public NeuralNetwork(List<LayerConnection> connections, IActivationFunction activationFunction) {
-        this.connections = connections;
+    public NeuralNetwork(List<double[][]> weights, IActivationFunction activationFunction) {
         this.activationFunction = activationFunction;
+        this.weights = weights.stream()
+                .map(LayerConnection::new)
+                .toList();
+    }
+
+    @Override
+    public void save() {
+
+    }
+
+    @Override
+    public void readWeights() {
+
+    }
+
+    @Override
+    public IVektor verarbeite(IVektor inputVector) {
+        IVektor nextOutputVector = null;
+
+        for (LayerConnection layer : weights) {
+            nextOutputVector = layer.calculateOutputVector(inputVector);
+            nextOutputVector = new Vektor(
+                    Arrays.stream(nextOutputVector.getVektor())
+                            .map(activationFunction::function)
+                            .toArray());
+        }
+
+        return nextOutputVector;
     }
 }
