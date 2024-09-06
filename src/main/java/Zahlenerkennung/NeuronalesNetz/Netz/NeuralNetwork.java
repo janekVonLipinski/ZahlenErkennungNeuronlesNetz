@@ -32,11 +32,11 @@ public class NeuralNetwork implements INeuralNetwork {
     }
 
     @Override
-    public IVektor verarbeite(IVektor inputVector) {
-        IVektor nextOutputVector = null;
+    public IVektor calculate(IVektor inputVector) {
+        IVektor nextOutputVector = inputVector;
 
         for (LayerConnection layer : weights) {
-            nextOutputVector = layer.calculateOutputVector(inputVector);
+            nextOutputVector = layer.calculateOutputVector(nextOutputVector);
             nextOutputVector = new Vektor(
                     Arrays.stream(nextOutputVector.getVektor())
                             .map(activationFunction::function)
