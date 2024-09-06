@@ -1,6 +1,5 @@
 package Zahlenerkennung.NeuronalesNetz.Netz;
 
-public class NeuronalesNetz {
-
+public class NeuralNetwork {
 
 }

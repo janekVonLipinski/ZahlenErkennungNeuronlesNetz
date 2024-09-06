@@ -1,6 +1,6 @@
 package Zahlenerkennung.NeuronalesNetz;
 
-public interface INeuronalesNetz {
+public interface INeuralNetwork {
 
     void save();
     verarbeite(Bild bild);
