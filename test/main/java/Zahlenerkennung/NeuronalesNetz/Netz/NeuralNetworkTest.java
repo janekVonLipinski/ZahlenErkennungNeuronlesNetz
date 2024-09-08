@@ -21,7 +21,9 @@ class NeuralNetworkTest {
 
         double[] expectedVector = {0.726, 0.708, 0.778};
 
-        INeuralNetwork neuralNetwork = new NeuralNetwork(List.of(firstConnection, secondConnection), new SigmoidFunction());
+        INeuralNetwork neuralNetwork = new NeuralNetwork(
+                List.of(firstConnection, secondConnection), new SigmoidFunction()
+        );
         IVektor result = neuralNetwork.calculate(new Vektor(input));
 
         System.out.println(result);

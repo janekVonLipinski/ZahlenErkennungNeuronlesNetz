@@ -32,6 +32,14 @@ public class NeuralNetwork implements INeuralNetwork {
     }
 
     @Override
+    public void train(IVektor inputVector) {
+        IVektor outputVector = calculate(inputVector);
+        IVektor errorVector = backPropagate(outputVector);
+
+        weights.forEach(i -> System.out.println(i.getError()));
+    }
+
+    @Override
     public IVektor calculate(IVektor inputVector) {
         IVektor nextOutputVector = inputVector;
 
@@ -40,9 +48,20 @@ public class NeuralNetwork implements INeuralNetwork {
             nextOutputVector = new Vektor(
                     Arrays.stream(nextOutputVector.getVektor())
                             .map(activationFunction::function)
-                            .toArray());
+                            .toArray()
+            );
         }
 
         return nextOutputVector;
+    }
+
+    protected IVektor backPropagate(IVektor outputVector) {
+        IVektor errorVector = outputVector;
+
+        for (LayerConnection connection : weights) {
+            errorVector = connection.backPropagateError(errorVector);
+        }
+
+        return errorVector;
     }
 }
