@@ -33,6 +33,18 @@ public class Vektor implements IVektor {
         return transfromiereMatrixInVektor(neueMatrix);
     }
 
+    @Override
+    public IMatrix transformiereVektorInMatrix() {
+        double[][] vektorAlsArray = new double[vektorWerte.length][1];
+
+        for (int i = 0; i < vektorWerte.length; i++) {
+            vektorAlsArray[i][0] = vektorWerte[i];
+        }
+
+        return new Matrix(vektorAlsArray);
+    }
+
+    @Override
     public IVektor subtrahiere(IVektor v2) {
         double[] werteVonV2 = v2.getVektor();
         double[] differenz = new double[werteVonV2.length];
@@ -53,16 +65,6 @@ public class Vektor implements IVektor {
         }
 
         return new Vektor(vektor);
-    }
-
-    private IMatrix transformiereVektorInMatrix() {
-        double[][] vektorAlsArray = new double[vektorWerte.length][1];
-
-        for (int i = 0; i < vektorWerte.length; i++) {
-            vektorAlsArray[i][0] = vektorWerte[i];
-        }
-
-        return new Matrix(vektorAlsArray);
     }
 
     @Override

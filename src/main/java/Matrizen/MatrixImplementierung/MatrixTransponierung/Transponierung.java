@@ -8,18 +8,14 @@ public class Transponierung {
     public IMatrix transponiere(IMatrix m) {
         IMatrix matrixKopie = new Matrix((Matrix) m);
         double[][] matrix = matrixKopie.getMatrix();
+        double[][] transponierteMatrix = new double[m.getAnzahlSpalten()][m.getAnzahlZeilen()];
 
-        for (int zeilenIndex = 0; zeilenIndex < matrix.length; zeilenIndex++) {
-            for (int spaltenIndex = zeilenIndex; spaltenIndex < matrix.length; spaltenIndex++) {
-                if (zeilenIndex == spaltenIndex) {
-                    continue;
-                }
-                double temp = matrix[zeilenIndex][spaltenIndex];
-                matrix[zeilenIndex][spaltenIndex] = matrix[spaltenIndex][zeilenIndex];
-                matrix[spaltenIndex][zeilenIndex] = temp;
+        for (int zeilenIndex = 0; zeilenIndex < m.getAnzahlZeilen(); zeilenIndex++) {
+            for (int spaltenIndex = 0; spaltenIndex < m.getAnzahlSpalten(); spaltenIndex++) {
+                transponierteMatrix[spaltenIndex][zeilenIndex] = matrix[zeilenIndex][spaltenIndex];
             }
         }
 
-        return matrixKopie;
+        return new Matrix(transponierteMatrix);
     }
 }

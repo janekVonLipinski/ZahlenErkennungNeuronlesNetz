@@ -8,4 +8,5 @@ public interface IVektor {
     double[] getVektor();
     IVektor multipliziere(IMatrix m);
     IVektor subtrahiere(IVektor v);
+    IMatrix transformiereVektorInMatrix();
 }

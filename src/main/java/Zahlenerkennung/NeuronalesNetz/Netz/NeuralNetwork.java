@@ -3,8 +3,8 @@ package Zahlenerkennung.NeuronalesNetz.Netz;
 import Vektor.IVektor;
 import Vektor.Vektor;
 import Zahlenerkennung.NeuronalesNetz.INeuralNetwork;
-import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.LayerConnection;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.IActivationFunction;
+import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.LayerConnection;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,7 @@ public class NeuralNetwork implements INeuralNetwork {
     public NeuralNetwork(List<double[][]> weights, IActivationFunction activationFunction) {
         this.activationFunction = activationFunction;
         this.weights = weights.stream()
-                .map(LayerConnection::new)
+                .map(weight -> new LayerConnection(weight, activationFunction))
                 .toList();
     }
 
@@ -35,6 +35,9 @@ public class NeuralNetwork implements INeuralNetwork {
     public void train(IVektor inputVector) {
         IVektor outputVector = calculate(inputVector);
         IVektor errorVector = backPropagate(outputVector);
+
+        LayerConnection layer = weights.get(weights.size() - 1);
+        IVektor backPropagateError;
 
         weights.forEach(i -> System.out.println(i.getError()));
     }
