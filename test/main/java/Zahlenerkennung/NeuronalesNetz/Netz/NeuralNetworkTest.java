@@ -2,13 +2,12 @@ package Zahlenerkennung.NeuronalesNetz.Netz;
 
 import Vektor.IVektor;
 import Vektor.Vektor;
-import Zahlenerkennung.NeuronalesNetz.INeuralNetwork;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.ActivationFunction.SigmoidFunction;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class NeuralNetworkTest {
 
@@ -21,7 +20,7 @@ class NeuralNetworkTest {
 
         double[] expectedVector = {0.726, 0.708, 0.778};
 
-        INeuralNetwork neuralNetwork = new NeuralNetwork(
+        NeuralNetwork neuralNetwork = new NeuralNetwork(
                 List.of(firstConnection, secondConnection), new SigmoidFunction()
         );
         IVektor result = neuralNetwork.calculate(new Vektor(input));

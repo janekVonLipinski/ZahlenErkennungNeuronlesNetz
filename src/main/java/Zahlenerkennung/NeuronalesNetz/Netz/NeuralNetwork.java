@@ -21,6 +21,10 @@ public class NeuralNetwork implements INeuralNetwork {
                 .toList();
     }
 
+    public List<LayerConnection> getWeights() {
+        return weights;
+    }
+
     @Override
     public void save() {
 
@@ -58,7 +62,7 @@ public class NeuralNetwork implements INeuralNetwork {
         return nextOutputVector;
     }
 
-    protected IVektor backPropagate(IVektor outputVector) {
+    public IVektor backPropagate(IVektor outputVector) {
         IVektor errorVector = outputVector;
 
         for (LayerConnection connection : weights) {

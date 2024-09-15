@@ -14,9 +14,8 @@ class LayerConnectionTest {
     void Given_values_From_book_then_delta_is_correct() {
         double sum = 2.3;
         double error = 0.8;
-        double inputPrev = 0.4;
 
-        double result = connection.calculateDerivation(error, sum, inputPrev);
+        double result = connection.calculateDerivation(error, sum);
         double expected = -0.0265;
 
         assertEquals(expected, result, 0.001);

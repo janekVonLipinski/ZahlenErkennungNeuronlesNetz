@@ -4,7 +4,8 @@ import Matrizen.IMatrix;
 import Matrizen.MatrixImplementierung.DeterminantenBerechnung.Algorithmen.DeterminantenRechnerNachLaplace;
 import Matrizen.MatrixImplementierung.DeterminantenBerechnung.Determinante;
 import Matrizen.MatrixImplementierung.Inverse.InverseMatrix;
-import Matrizen.MatrixImplementierung.MatrixMultiplikation.MatrixMultiplikator;
+import Matrizen.MatrixImplementierung.MatrixArithmetic.MatrixMultiplikator;
+import Matrizen.MatrixImplementierung.MatrixArithmetic.MatrixSubtraktion;
 import Matrizen.MatrixImplementierung.MatrixTransponierung.Transponierung;
 import Matrizen.MatrixImplementierung.MatrixUmformung.Diagonalform;
 import Matrizen.MatrixImplementierung.MatrixUmformung.Hilfe;
@@ -102,6 +103,11 @@ public class Matrix implements IMatrix {
     @Override
     public IMatrix getDiagonalForm() {
         return diagonalform.formeMatrixInDiagonalFormUm(this);
+    }
+
+    @Override
+    public IMatrix subtrahiere(IMatrix matrix) {
+        return new MatrixSubtraktion().subtrahiere(this, matrix);
     }
 
     @Override

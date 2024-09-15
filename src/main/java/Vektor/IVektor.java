@@ -9,4 +9,5 @@ public interface IVektor {
     IVektor multipliziere(IMatrix m);
     IVektor subtrahiere(IVektor v);
     IMatrix transformiereVektorInMatrix();
+    double calculateSumOfElements();
 }

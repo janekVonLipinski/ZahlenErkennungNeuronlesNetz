@@ -9,19 +9,19 @@ import java.util.stream.Collectors;
 
 public class Vektor implements IVektor {
 
-    private final double[] vektorWerte;
+    private final double[] vektor;
 
     public Vektor(double[] werte) {
-        this.vektorWerte = werte;
+        this.vektor = werte;
     }
 
     public Vektor(Vektor v) {
-        this.vektorWerte = Arrays.copyOf(v.vektorWerte, v.vektorWerte.length);
+        this.vektor = Arrays.copyOf(v.vektor, v.vektor.length);
     }
 
     @Override
     public double[] getVektor() {
-        return vektorWerte;
+        return vektor;
     }
 
     @Override
@@ -35,10 +35,10 @@ public class Vektor implements IVektor {
 
     @Override
     public IMatrix transformiereVektorInMatrix() {
-        double[][] vektorAlsArray = new double[vektorWerte.length][1];
+        double[][] vektorAlsArray = new double[vektor.length][1];
 
-        for (int i = 0; i < vektorWerte.length; i++) {
-            vektorAlsArray[i][0] = vektorWerte[i];
+        for (int i = 0; i < vektor.length; i++) {
+            vektorAlsArray[i][0] = vektor[i];
         }
 
         return new Matrix(vektorAlsArray);
@@ -50,10 +50,21 @@ public class Vektor implements IVektor {
         double[] differenz = new double[werteVonV2.length];
 
         for (int i = 0; i < werteVonV2.length; i++) {
-            differenz[i] = werteVonV2[i] - vektorWerte[i];
+            differenz[i] = werteVonV2[i] - vektor[i];
         }
 
         return new Vektor(differenz);
+    }
+
+    @Override
+    public double calculateSumOfElements() {
+        double sum = 0;
+
+        for (double element : vektor) {
+            sum += element;
+        }
+
+        return sum;
     }
 
     private IVektor transfromiereMatrixInVektor(IMatrix neueMatrix) {
@@ -69,7 +80,7 @@ public class Vektor implements IVektor {
 
     @Override
     public String toString() {
-        return Arrays.stream(vektorWerte)
+        return Arrays.stream(vektor)
                 .mapToObj(value -> Double.toString(value) + "\n")
                 .collect(Collectors.joining());
     }

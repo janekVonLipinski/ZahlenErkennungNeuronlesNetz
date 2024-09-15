@@ -1,4 +1,4 @@
-package Matrizen.MatrixImplementierung.MatrixMultiplikation;
+package Matrizen.MatrixImplementierung.MatrixArithmetic;
 
 
 import Matrizen.IMatrix;
@@ -11,7 +11,18 @@ public class MatrixMultiplikator {
 
         if (m1.getAnzahlSpalten() != m2.getAnzahlZeilen()) {
             throw new IllegalArgumentException(
-                    "Zeilen von linker Matrix müssen geleich den Spalten der zweiten sein");
+                    "Zeilen von linker Matrix müssen gleich den Spalten der zweiten sein"
+            );
+        }
+
+        if (m1.getAnzahlSpalten() == 1 && m2.getAnzahlZeilen() == 1) {
+            for (int i = 0; i < m1.getAnzahlZeilen(); i++) {
+                for (int j = 0; j < m2.getAnzahlSpalten(); j++) {
+                    ergebnis.getMatrix()[i][j] = m1.getMatrix()[i][0] * m2.getMatrix()[0][j];
+                }
+            }
+
+            return ergebnis;
         }
 
         for (int i = 0; i < ergebnis.getAnzahlZeilen(); i++) {

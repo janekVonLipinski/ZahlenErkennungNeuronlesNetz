@@ -12,4 +12,5 @@ public interface IMatrix {
     IMatrix getInverseMatrix();
     IMatrix getDiagonalForm();
     IMatrix getStufenForm();
+    IMatrix subtrahiere(IMatrix matrix);
 }
