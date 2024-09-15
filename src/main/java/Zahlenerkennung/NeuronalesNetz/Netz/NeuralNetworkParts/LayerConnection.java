@@ -19,11 +19,6 @@ public class LayerConnection {
         transposedWeightMatrix = weightMatrix.transponiere();
         sigmoid = activationFunction;
     }
-
-    public IMatrix getWeightMatrix() {
-        return weightMatrix;
-    }
-
     public IVektor getError() {
         return error;
     }
@@ -37,38 +32,41 @@ public class LayerConnection {
         return outputVector;
     }
 
-    public IMatrix improveWeights() {
+    public IVektor backPropagateError(IVektor nextLayerOutputVector) {
+        error = nextLayerOutputVector.multipliziere(transposedWeightMatrix);
+        return error;
+    }
+
+    public IMatrix improveWeights(double learningRate) {
 
         IMatrix transposedError = inputFromPrevLayerWithoutSigmoid.transformiereVektorInMatrix();
         IMatrix transposedVector = transposedError.transponiere();
+        IMatrix change = calculateChangeMatrix(learningRate);
 
-        double[] v = outputOfThisLayer.getVektor();
-        double[] changeArray = new double[v.length];
-
-        for (int i = 0; i < v.length; i++) {
-            double value = v[i];
-            double errorValue = error.getVektor()[i];
-
-            double newValue = calculateDerivation(errorValue, value);
-            changeArray[i] = newValue;
-        }
-
-        IVektor changeVector = new Vektor(changeArray);
-        IMatrix changeVectorTransformedToMatrix = changeVector.transformiereVektorInMatrix();
-        IMatrix changeMatrix = changeVectorTransformedToMatrix.multipliziere(transposedVector);
+        IMatrix changeMatrix = change.multipliziere(transposedVector);
 
         weightMatrix = weightMatrix.subtrahiere(changeMatrix);
 
         return weightMatrix;
     }
 
-    public IVektor backPropagateError(IVektor nextLayerOutputVector) {
-        error = nextLayerOutputVector.multipliziere(transposedWeightMatrix);
-        return error;
+    private IMatrix calculateChangeMatrix(double learningRate) {
+        double[] v = outputOfThisLayer.getVektor();
+        double[] changeArray = new double[v.length];
+
+        for (int i = 0; i < v.length; i++) {
+            double value = v[i];
+            double errorValue = error.getVektor()[i];
+            double newValue = calculateDerivation(errorValue, value, learningRate);
+            changeArray[i] = newValue;
+        }
+
+        IVektor changeVector = new Vektor(changeArray);
+        return changeVector.transformiereVektorInMatrix();
     }
 
-    protected double calculateDerivation(double error, double input) {
+    private double calculateDerivation(double error, double input, double learningRate) {
         double sigmoidOfInput = sigmoid.function(input);
-        return error * sigmoidOfInput * (1 - sigmoidOfInput);
+        return learningRate * error * sigmoidOfInput * (1 - sigmoidOfInput);
     }
 }

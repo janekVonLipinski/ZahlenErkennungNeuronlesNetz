@@ -4,8 +4,6 @@ import Vektor.IVektor;
 
 public interface INeuralNetwork {
 
-    void save();
-    void readWeights();
     IVektor calculate(IVektor vector);
-    void train(IVektor vector);
+    void train(IVektor vector, IVektor expectedVector, int numberOfSessions);
 }

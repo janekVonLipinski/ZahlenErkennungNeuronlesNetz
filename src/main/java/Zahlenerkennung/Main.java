@@ -1,6 +1,5 @@
 package Zahlenerkennung;
 
-import Matrizen.IMatrix;
 import Vektor.IVektor;
 import Vektor.Vektor;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetwork;
@@ -15,18 +14,19 @@ public class Main {
         double[][] firstConnection = {{0.9, 0.3, 0.4}, {0.2, 0.8, 0.2}, {0.1, 0.5, 0.6}};
         double[][] secondConnection = {{0.3, 0.7, 0.5}, {0.6, 0.5, 0.2}, {0.8, 0.1, 0.9}};
 
-        double[] expectedVector = {0.726, 0.708, 0.778};
+        IVektor inputVektor = new Vektor(input);
 
         NeuralNetwork neuralNetwork = new NeuralNetwork(
-                List.of(firstConnection, secondConnection), new SigmoidFunction()
+                List.of(firstConnection, secondConnection), new SigmoidFunction(), 1.0
         );
 
-        IVektor result = neuralNetwork.calculate(new Vektor(input));
+        IVektor result = neuralNetwork.calculate(inputVektor);
 
-        System.out.println("ein toller test");
+        double[] expected = {0.5, 0.5, 0.5};
+        IVektor res = new Vektor(expected);
 
-        neuralNetwork.backPropagate(result);
-        IMatrix matrix = neuralNetwork.getWeights().get(0).improveWeights();
-        System.out.println(matrix);
+        neuralNetwork.train(inputVektor, res, 1000000);
+
+
     }
 }
