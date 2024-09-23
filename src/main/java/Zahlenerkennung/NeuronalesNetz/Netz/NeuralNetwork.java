@@ -12,35 +12,22 @@ import java.util.List;
 public class NeuralNetwork implements INeuralNetwork {
 
     private final List<LayerConnection> weights;
-    private final double learningRate;
     private final IActivationFunction activationFunction;
 
-    public NeuralNetwork(List<double[][]> weights, IActivationFunction activationFunction, double learningRate) {
+    public NeuralNetwork(List<double[][]> weights, IActivationFunction activationFunction) {
         this.activationFunction = activationFunction;
         this.weights = weights.stream()
                 .map(weight -> new LayerConnection(weight, activationFunction))
                 .toList();
-        this.learningRate = learningRate;
-    }
-
-    public List<LayerConnection> getWeights() {
-        return weights;
     }
 
     @Override
-    public void train(IVektor inputVector, IVektor expectedVector, int numberOfSessions) {
+    public void train(IVektor inputVector, IVektor expectedVector, int numberOfSessions, double learningRate) {
 
         for (int i = 0; i < numberOfSessions; i++) {
 
             IVektor outputVector = calculate(inputVector);
-
-            IVektor diff = expectedVector.subtrahiere(outputVector);
-            IVektor squaredDifference = new Vektor(
-                    Arrays.stream(diff.getVektor())
-                            .map(j -> Math.pow(j, 2))
-                            .toArray()
-            );
-
+            IVektor squaredDifference = calculateSquaredDifference(expectedVector, outputVector);
             IVektor errorVector = backPropagate(squaredDifference);
 
             for (LayerConnection connection : weights) {
@@ -76,5 +63,14 @@ public class NeuralNetwork implements INeuralNetwork {
         }
 
         return errorVector;
+    }
+
+    private IVektor calculateSquaredDifference(IVektor expectedVector, IVektor outputVector) {
+        IVektor diff = expectedVector.subtrahiere(outputVector);
+        return new Vektor(
+                Arrays.stream(diff.getVektor())
+                        .map(j -> Math.pow(j, 2))
+                        .toArray()
+        );
     }
 }

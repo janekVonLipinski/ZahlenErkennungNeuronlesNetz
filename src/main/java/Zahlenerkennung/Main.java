@@ -17,7 +17,7 @@ public class Main {
         IVektor inputVektor = new Vektor(input);
 
         NeuralNetwork neuralNetwork = new NeuralNetwork(
-                List.of(firstConnection, secondConnection), new SigmoidFunction(), 1.0
+                List.of(firstConnection, secondConnection), new SigmoidFunction()
         );
 
         IVektor result = neuralNetwork.calculate(inputVektor);
@@ -25,8 +25,6 @@ public class Main {
         double[] expected = {0.5, 0.5, 0.5};
         IVektor res = new Vektor(expected);
 
-        neuralNetwork.train(inputVektor, res, 1000000);
-
-
+        neuralNetwork.train(inputVektor, res, 1000000,  1.0);
     }
 }
