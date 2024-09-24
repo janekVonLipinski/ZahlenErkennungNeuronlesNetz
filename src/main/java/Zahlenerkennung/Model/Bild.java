@@ -2,21 +2,21 @@ package Zahlenerkennung.Model;
 
 public class Bild {
 
-    private final String label;
-    private final double[] pixel;
+    private final int label;
+    private final int[] pixel;
     private final int rowOffset;
 
-    public Bild(String label, double[] pixel, int rowOffset) {
+    public Bild(int label, int[] pixel, int rowOffset) {
         this.label = label;
         this.pixel = pixel;
         this.rowOffset = rowOffset;
     }
 
-    public String getLabel() {
+    public int getLabel() {
         return label;
     }
 
-    public double[] getPixel() {
+    public int[] getPixel() {
         return pixel;
     }
 
