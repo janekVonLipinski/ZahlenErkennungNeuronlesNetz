@@ -3,43 +3,28 @@ package Zahlenerkennung.Model;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 
 public class InputReader {
-    private String labelFilePath;
-    private String imageFilePath;
+    private static final int MAGICNUMBERBYTES = 4;
 
-    public InputReader(String labelFilePath, String imageFilePath) {
-        this.labelFilePath = labelFilePath;
-        this.imageFilePath = imageFilePath;
-    }
-
-    public void setLabelFilePath(String labelFilePath) {
-        this.labelFilePath = labelFilePath;
-    }
-
-    public void setImageFilePath(String imageFilePath) {
-        this.imageFilePath = imageFilePath;
-    }
-
-    public int getLabel(int n) throws IOException, IndexOutOfBoundsException {
+    public int getLabel(int n, String labelFilePath) throws IOException {
         try (FileInputStream fis = new FileInputStream(labelFilePath)) {
             byte[] buffer = new byte[4];
-            fis.skip(4);
+            fis.skip(MAGICNUMBERBYTES);
             fis.read(buffer);
             int numLabels = ByteBuffer.wrap(buffer).getInt();
 
-            if (n >= numLabels) throw new IndexOutOfBoundsException();
+            if (n >= numLabels) throw new IllegalArgumentException("n has to be in range from [0, %d]: currently %d!".formatted(numLabels, n));
 
             fis.skip(n);
             return fis.read();
         }
     }
 
-    public Bild getImage(int n) throws IOException, IndexOutOfBoundsException {
+    public Bild getImage(int n, String labelFilePath, String imageFilePath) throws IOException, IllegalArgumentException {
         try (FileInputStream fis  = new FileInputStream(imageFilePath)) {
             byte[] buffer = new byte[4];
-            fis.skip(4);
+            fis.skip(MAGICNUMBERBYTES);
 
             fis.read(buffer);
             int numImages = ByteBuffer.wrap(buffer).getInt();
@@ -59,7 +44,7 @@ public class InputReader {
                 pixels[i] = fis.read();
             }
 
-            int label = getLabel(n);
+            int label = getLabel(n,  labelFilePath);
             return new Bild(label, pixels, numCols);
         }
     }
@@ -69,7 +54,7 @@ public class InputReader {
         int[] labels;
         int numLabels;
         try (FileInputStream fis = new FileInputStream(labelFilePath)) {
-            fis.skip(4);
+            fis.skip(MAGICNUMBERBYTES);
             fis.read(buffer);
             numLabels = ByteBuffer.wrap(buffer).getInt();
             labels = new int[numLabels];
@@ -81,7 +66,7 @@ public class InputReader {
         int numCols;
         try (FileInputStream fis = new FileInputStream(imageFilePath)) {
 
-            fis.skip(4);
+            fis.skip(MAGICNUMBERBYTES);
 
             fis.read(buffer);
             int numImages = ByteBuffer.wrap(buffer).getInt();
@@ -97,7 +82,6 @@ public class InputReader {
                 for (int pixel = 0; pixel < numRows*numCols; pixel++) {
                     pixels[i][pixel] = fis.read();
                 }
-                if (i%1000 == 0) System.out.println(i + " images done!");
             }
         }
 
