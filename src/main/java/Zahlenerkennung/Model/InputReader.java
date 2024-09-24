@@ -49,7 +49,7 @@ public class InputReader {
         }
     }
 
-    public Bild[] getImages () throws IOException {
+    public Bild[] getImages (String labelFilePath, String imageFilePath) throws IOException {
         byte[] buffer = new byte[4];
         int[] labels;
         int numLabels;
