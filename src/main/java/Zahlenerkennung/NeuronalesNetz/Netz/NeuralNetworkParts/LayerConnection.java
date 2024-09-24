@@ -41,7 +41,7 @@ public class LayerConnection {
 
         IMatrix transposedError = inputFromPrevLayerWithoutSigmoid.transformiereVektorInMatrix();
         IMatrix transposedVector = transposedError.transponiere();
-        IMatrix change = calculateChangeMatrix(learningRate);
+        IMatrix change = calculateErrorVector(learningRate);
 
         IMatrix changeMatrix = change.multipliziere(transposedVector);
 
@@ -50,7 +50,7 @@ public class LayerConnection {
         return weightMatrix;
     }
 
-    private IMatrix calculateChangeMatrix(double learningRate) {
+    private IMatrix calculateErrorVector(double learningRate) {
         double[] v = outputOfThisLayer.getVektor();
         double[] changeArray = new double[v.length];
 

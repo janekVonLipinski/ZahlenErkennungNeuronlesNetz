@@ -22,9 +22,9 @@ public class NeuralNetwork implements INeuralNetwork {
     }
 
     @Override
-    public void train(IVektor inputVector, IVektor expectedVector, int numberOfSessions, double learningRate) {
+    public void train(IVektor inputVector, IVektor expectedVector, int numberOfIterations, double learningRate) {
 
-        for (int i = 0; i < numberOfSessions; i++) {
+        for (int i = 0; i < numberOfIterations; i++) {
 
             IVektor outputVector = calculate(inputVector);
             IVektor squaredDifference = calculateSquaredDifference(expectedVector, outputVector);
@@ -36,7 +36,6 @@ public class NeuralNetwork implements INeuralNetwork {
         }
 
         System.out.println(calculate(inputVector));
-
     }
 
     @Override
@@ -69,7 +68,7 @@ public class NeuralNetwork implements INeuralNetwork {
         IVektor diff = expectedVector.subtrahiere(outputVector);
         return new Vektor(
                 Arrays.stream(diff.getVektor())
-                        .map(j -> Math.pow(j, 2))
+                        .map(j -> j * j)
                         .toArray()
         );
     }
