@@ -116,4 +116,20 @@ public class Matrix implements IMatrix {
                 .map(row -> Arrays.toString(row) + "\n")
                 .collect(Collectors.joining());
     }
+
+    @Override
+    public String toCSVString() {
+        StringBuilder output = new StringBuilder();
+
+        for (double[] doubles : matrix) {
+            for (double number : doubles) {
+                output.append(number);
+                output.append(" ");
+            }
+            output.delete(output.length() - 1, output.length());
+            output.append(";\n");
+        }
+
+        return output.toString();
+    }
 }

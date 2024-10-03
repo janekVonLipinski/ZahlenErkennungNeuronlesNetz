@@ -1,13 +1,17 @@
 package Zahlenerkennung.NeuronalesNetz.Netz;
 
+import Matrizen.IMatrix;
 import Vektor.IVektor;
 import Vektor.Vektor;
 import Zahlenerkennung.NeuronalesNetz.INeuralNetwork;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.IActivationFunction;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.LayerConnection;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class NeuralNetwork implements INeuralNetwork {
 
@@ -52,6 +56,19 @@ public class NeuralNetwork implements INeuralNetwork {
         }
 
         return nextOutputVector;
+    }
+
+    public void writeWeightsToFile(String fileName) throws IOException {
+        FileOutputStream fis = new FileOutputStream(fileName);
+
+        String output = weights.stream()
+                .map(LayerConnection::getWeightMatrix)
+                .map(IMatrix::toCSVString)
+                .map(string -> string + "\n")
+                .collect(Collectors.joining());
+
+        fis.write(output.getBytes());
+        fis.close();
     }
 
     public IVektor backPropagate(IVektor outputVector) {

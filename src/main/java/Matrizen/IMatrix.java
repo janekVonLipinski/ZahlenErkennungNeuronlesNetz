@@ -13,4 +13,5 @@ public interface IMatrix {
     IMatrix getDiagonalForm();
     IMatrix getStufenForm();
     IMatrix subtrahiere(IMatrix matrix);
+    String toCSVString();
 }
