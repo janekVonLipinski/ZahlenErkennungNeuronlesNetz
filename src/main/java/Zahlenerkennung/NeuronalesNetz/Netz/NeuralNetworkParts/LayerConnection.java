@@ -5,6 +5,8 @@ import Matrizen.MatrixImplementierung.Matrix;
 import Vektor.IVektor;
 import Vektor.Vektor;
 
+import java.util.Arrays;
+
 public class LayerConnection {
 
     private IMatrix weightMatrix;
@@ -39,7 +41,14 @@ public class LayerConnection {
 
     public IMatrix improveWeights(double learningRate) {
 
-        IMatrix transposedError = inputFromPrevLayerWithoutSigmoid.transformiereVektorInMatrix();
+        Vektor inputWithSigmoid = new Vektor (
+                Arrays.stream(inputFromPrevLayerWithoutSigmoid.getVektor())
+                        .map(sigmoid::function)
+                        .toArray()
+        );
+
+        IMatrix transposedError = inputWithSigmoid.transformiereVektorInMatrix();
+
         IMatrix transposedVector = transposedError.transponiere();
         IMatrix change = calculateErrorVector(learningRate);
 
@@ -51,11 +60,13 @@ public class LayerConnection {
     }
 
     private IMatrix calculateErrorVector(double learningRate) {
-        double[] v = outputOfThisLayer.getVektor();
-        double[] changeArray = new double[v.length];
+        double[] outputFromThisLayerArray = outputOfThisLayer.getVektor();
+        double[] changeArray = new double[outputFromThisLayerArray.length];
+        double[] inputFromPrevLayer = inputFromPrevLayerWithoutSigmoid.getVektor();
 
-        for (int i = 0; i < v.length; i++) {
-            double value = v[i];
+        for (int i = 0; i < outputFromThisLayerArray.length; i++) {
+
+            double value = outputFromThisLayerArray[i];
             double errorValue = error.getVektor()[i];
             double newValue = calculateDerivation(errorValue, value, learningRate);
             changeArray[i] = newValue;
@@ -67,6 +78,6 @@ public class LayerConnection {
 
     private double calculateDerivation(double error, double input, double learningRate) {
         double sigmoidOfInput = sigmoid.function(input);
-        return learningRate * error * sigmoidOfInput * (1 - sigmoidOfInput);
+        return -learningRate * error * sigmoidOfInput * (1 - sigmoidOfInput);
     }
 }
