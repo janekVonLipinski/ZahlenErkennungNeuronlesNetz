@@ -4,6 +4,7 @@ import Vektor.IVektor;
 import Vektor.Vektor;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetwork;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.ActivationFunction.SigmoidFunction;
+import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.SaveWeights;
 
 import java.util.List;
 
@@ -25,6 +26,9 @@ public class Main {
         double[] expected = {0.5, 0.5, 0.5};
         IVektor res = new Vektor(expected);
 
-        neuralNetwork.train(inputVektor, res, 1000000,  1.0);
+        neuralNetwork.train(inputVektor, res, 100000,  1.0);
+
+        SaveWeights saveWeights = new SaveWeights();
+        saveWeights.saveWeights(neuralNetwork);
     }
 }

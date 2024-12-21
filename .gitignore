@@ -44,3 +44,5 @@ nbdist/
 # Others
 ## Generated files
 generated-sources/
+/src/main/resources/weights/wights.txt
+/src/main/resources/weights/

@@ -25,6 +25,10 @@ public class LayerConnection {
         return error;
     }
 
+    public IMatrix getWeightMatrix() {
+        return weightMatrix;
+    }
+
     public IVektor calculateOutputVector(IVektor inputVektor) {
 
         IVektor outputVector = inputVektor.multipliziere(weightMatrix);

@@ -34,8 +34,6 @@ public class NeuralNetwork implements INeuralNetwork {
                 connection.improveWeights(learningRate);
             }
         }
-
-        System.out.println(calculate(inputVector));
     }
 
     @Override
@@ -71,5 +69,9 @@ public class NeuralNetwork implements INeuralNetwork {
                         .map(j -> j * j)
                         .toArray()
         );
+    }
+
+    public List<LayerConnection> getWeights() {
+        return weights;
     }
 }
