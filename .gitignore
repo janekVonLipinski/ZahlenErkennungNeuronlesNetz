@@ -1,0 +1,46 @@
+*.class
+
+target/
+
+# Logs
+*.log
+*.out
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# IDE-specific files and directories
+## IntelliJ IDEA
+.idea
+*.iml
+out/
+
+## Eclipse
+.classpath
+.project
+.settings/
+
+## VS Code
+.vscode/
+
+## NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Maven-specific files
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Environment Variables Files
+.env
+
+# Others
+## Generated files
+generated-sources/
