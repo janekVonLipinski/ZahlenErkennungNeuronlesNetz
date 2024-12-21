@@ -68,6 +68,7 @@ public class LayerConnection {
 
             double value = outputFromThisLayerArray[i];
             double errorValue = error.getVektor()[i];
+
             double newValue = calculateDerivation(errorValue, value, learningRate);
             changeArray[i] = newValue;
         }
@@ -76,8 +77,7 @@ public class LayerConnection {
         return changeVector.transformiereVektorInMatrix();
     }
 
-    private double calculateDerivation(double error, double input, double learningRate) {
-        double sigmoidOfInput = sigmoid.function(input);
-        return -learningRate * error * sigmoidOfInput * (1 - sigmoidOfInput);
+    private double calculateDerivation(double error, double output, double learningRate) {
+        return -learningRate * error * output * (1 - output);
     }
 }
