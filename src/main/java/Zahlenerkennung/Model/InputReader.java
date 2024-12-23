@@ -21,7 +21,7 @@ public class InputReader {
         }
     }
 
-    public Bild getImage(int n, String labelFilePath, String imageFilePath) throws IOException, IllegalArgumentException {
+    public Picture getImage(int n, String labelFilePath, String imageFilePath) throws IOException, IllegalArgumentException {
         try (FileInputStream fis  = new FileInputStream(imageFilePath)) {
             byte[] buffer = new byte[4];
             fis.skip(NUMBER_OF_HEADER_BYTES);
@@ -45,11 +45,11 @@ public class InputReader {
             }
 
             int label = getLabel(n,  labelFilePath);
-            return new Bild(label, pixels, numCols);
+            return new Picture(label, pixels, numCols);
         }
     }
 
-    public Bild[] getImages (String labelFilePath, String imageFilePath) throws IOException {
+    public Picture[] getImages (String labelFilePath, String imageFilePath) throws IOException {
         byte[] buffer = new byte[4];
         int[] labels;
         int numLabels;
@@ -85,9 +85,9 @@ public class InputReader {
             }
         }
 
-        Bild[] bilder = new Bild[numLabels];
+        Picture[] bilder = new Picture[numLabels];
         for (int i = 0; i < numLabels; i++) {
-            bilder[i] = new Bild(labels[i], pixels[i], numCols);
+            bilder[i] = new Picture(labels[i], pixels[i], numCols);
         }
         return bilder;
     }

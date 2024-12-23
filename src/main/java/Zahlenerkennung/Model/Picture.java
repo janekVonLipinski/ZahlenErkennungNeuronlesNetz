@@ -2,13 +2,13 @@ package Zahlenerkennung.Model;
 
 import java.util.Arrays;
 
-public class Bild {
+public class Picture {
 
     private final int label;
     private final int[] pixel;
     private final int rowOffset;
 
-    public Bild(int label, int[] pixel, int rowOffset) {
+    public Picture(int label, int[] pixel, int rowOffset) {
         this.label = label;
         this.pixel = pixel;
         this.rowOffset = rowOffset;

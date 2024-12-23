@@ -1,7 +1,7 @@
 package Zahlenerkennung.ZahlenErkennungsNetz;
 
 import Vektor.IVektor;
-import Zahlenerkennung.Model.Bild;
+import Zahlenerkennung.Model.Picture;
 import Zahlenerkennung.Model.InputReader;
 import Zahlenerkennung.NeuronalesNetz.INeuralNetwork;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetwork;
@@ -23,7 +23,7 @@ public class NumberNeuralNetwork {
     }
 
     public void learn() {
-        Bild[] pictures = {};
+        Picture[] pictures = {};
 
         try {
             pictures = inputReader.getImages(LABEL_PATH, IMAGE_PATH);
@@ -31,7 +31,7 @@ public class NumberNeuralNetwork {
             System.out.println(ioe.getMessage());
         }
 
-        for (Bild picture : pictures) {
+        for (Picture picture : pictures) {
 
             IVektor labelVector = convertLabelToVector(picture);
             IVektor pictureVector = convertPictureToVector(picture);
@@ -42,11 +42,11 @@ public class NumberNeuralNetwork {
         saveWeights.saveWeights((NeuralNetwork) neuralNetwork);
     }
 
-    private IVektor convertLabelToVector(Bild picture) {
+    private IVektor convertLabelToVector(Picture picture) {
         return null;
     }
 
-    private IVektor convertPictureToVector(Bild picture) {
+    private IVektor convertPictureToVector(Picture picture) {
         return null;
     }
 }
