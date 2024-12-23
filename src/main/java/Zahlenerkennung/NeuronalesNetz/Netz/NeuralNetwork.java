@@ -41,6 +41,7 @@ public class NeuralNetwork implements INeuralNetwork {
         IVektor nextOutputVector = inputVector;
 
         for (LayerConnection layer : weights) {
+
             nextOutputVector = layer.calculateOutputVector(nextOutputVector);
             nextOutputVector = new Vektor(
                     Arrays.stream(nextOutputVector.getVektor())

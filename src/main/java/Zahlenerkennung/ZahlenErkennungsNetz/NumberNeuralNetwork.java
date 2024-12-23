@@ -1,13 +1,14 @@
 package Zahlenerkennung.ZahlenErkennungsNetz;
 
 import Vektor.IVektor;
+import Vektor.Vektor;
 import Zahlenerkennung.Model.Picture;
-import Zahlenerkennung.Model.InputReader;
 import Zahlenerkennung.NeuronalesNetz.INeuralNetwork;
-import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetwork;
 import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.SaveReadWeights;
+import Zahlenerkennung.reader.InputReader;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class NumberNeuralNetwork {
 
@@ -24,29 +25,50 @@ public class NumberNeuralNetwork {
 
     public void learn() {
         Picture[] pictures = {};
+        Picture picture = null;
+
 
         try {
-            pictures = inputReader.getImages(LABEL_PATH, IMAGE_PATH);
+            //pictures = inputReader.getImages(LABEL_PATH, IMAGE_PATH);
+            picture = inputReader.getImage(1, LABEL_PATH, IMAGE_PATH);
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
         }
 
+        trainNetworkWith(picture);
+
+        /*
         for (Picture picture : pictures) {
-
-            IVektor labelVector = convertLabelToVector(picture);
-            IVektor pictureVector = convertPictureToVector(picture);
-
-            neuralNetwork.train(pictureVector, labelVector, 1, 1.0);
+            trainNetworkWith(picture);
         }
 
         saveWeights.saveWeights((NeuralNetwork) neuralNetwork);
+        */
+    }
+
+    private void trainNetworkWith(Picture picture) {
+
+        IVektor labelVector = convertLabelToVector(picture);
+        IVektor pictureVector = convertPictureToVector(picture);
+        neuralNetwork.train(pictureVector, labelVector, 1, 1.0);
+
     }
 
     private IVektor convertLabelToVector(Picture picture) {
-        return null;
+
+        int numberOfNumbers = 10; //based name, i ever came up with
+        double[] numbers = new double[numberOfNumbers];
+        int label = picture.getLabel();
+        numbers[label] = 1;
+
+        return new Vektor(numbers);
     }
 
     private IVektor convertPictureToVector(Picture picture) {
-        return null;
+        double[] pictureOfDoubles = Arrays.stream(picture.getPixel())
+                .mapToDouble(i -> i)
+                .toArray();
+
+        return new Vektor(pictureOfDoubles);
     }
 }

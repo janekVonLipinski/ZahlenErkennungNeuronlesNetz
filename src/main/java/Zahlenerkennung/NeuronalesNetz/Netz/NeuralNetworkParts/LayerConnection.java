@@ -25,6 +25,10 @@ public class LayerConnection {
         return error;
     }
 
+    public IMatrix getTransposedWeightMatrix() {
+        return transposedWeightMatrix;
+    }
+
     public IMatrix getWeightMatrix() {
         return weightMatrix;
     }
