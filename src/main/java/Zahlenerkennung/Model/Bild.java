@@ -1,5 +1,7 @@
 package Zahlenerkennung.Model;
 
+import java.util.Arrays;
+
 public class Bild {
 
     private final int label;
@@ -22,5 +24,14 @@ public class Bild {
 
     public int getRowOffset() {
         return rowOffset;
+    }
+
+    @Override
+    public String toString() {
+        return "Bild{" +
+                "label=" + label +
+                ", pixel=" + Arrays.toString(pixel) +
+                ", rowOffset=" + rowOffset +
+                '}';
     }
 }
