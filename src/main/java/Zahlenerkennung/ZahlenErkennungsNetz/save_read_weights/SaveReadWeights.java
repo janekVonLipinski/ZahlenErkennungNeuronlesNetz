@@ -22,7 +22,7 @@ public class SaveReadWeights {
      */
     public void saveWeights(NeuralNetwork neuralNetwork) {
 
-        List<LayerConnection> weights = neuralNetwork.getWeights();
+        List<LayerConnection> weights = neuralNetwork.getLayersConnections();
         String weightsToSave = weights.stream()
                 .map(LayerConnection::getWeightMatrix)
                 .map(Object::toString)

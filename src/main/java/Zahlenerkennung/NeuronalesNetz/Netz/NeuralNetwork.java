@@ -73,6 +73,7 @@ public class NeuralNetwork implements INeuralNetwork {
         );
     }
 
+    @Override
     public List<LayerConnection> getLayersConnections() {
         return layersConnections;
     }

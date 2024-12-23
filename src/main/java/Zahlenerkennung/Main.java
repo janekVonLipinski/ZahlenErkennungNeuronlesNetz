@@ -6,6 +6,7 @@ import Zahlenerkennung.ZahlenErkennungsNetz.NumberNeuralNetwork;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Main {
 
@@ -45,9 +46,10 @@ public class Main {
 
 
     private static double[][] fillMatrix(int x, int y) {
+        Random random = new Random();
         double[][] arr = new double[x][y];
         for (double[] row : arr) {
-            Arrays.fill(row, 0.5);
+            Arrays.fill(row, random.nextDouble(0, 1.0));
         }
         return arr;
     }

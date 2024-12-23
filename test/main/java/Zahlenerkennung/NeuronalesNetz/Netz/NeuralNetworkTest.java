@@ -53,7 +53,6 @@ class NeuralNetworkTest {
         neuralNetwork.train(inputVektor, res, 1000,  0.1);
 
         IVektor resultAfterLearning = neuralNetwork.calculate(inputVektor);
-
         assertArrayEquals(notExpected, resultAfterLearning.getVektor(), 0.001);
     }
 }

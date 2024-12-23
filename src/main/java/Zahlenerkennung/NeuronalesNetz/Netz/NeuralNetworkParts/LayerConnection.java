@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class LayerConnection {
 
     private IMatrix weightMatrix;
-    private final IMatrix transposedWeightMatrix;
+    private IMatrix transposedWeightMatrix;
     private final IActivationFunction sigmoid;
     private IVektor outputOfThisLayer;
     private IVektor error;
@@ -60,7 +60,7 @@ public class LayerConnection {
         IMatrix changeMatrix = change.multipliziere(transposedVector);
 
         weightMatrix = weightMatrix.subtrahiere(changeMatrix);
-
+        transposedWeightMatrix = weightMatrix.transponiere();
         return weightMatrix;
     }
 
