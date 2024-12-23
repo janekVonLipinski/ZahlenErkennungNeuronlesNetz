@@ -2,12 +2,12 @@ package Zahlenerkennung.ZahlenErkennungsNetz;
 
 import Zahlenerkennung.NeuronalesNetz.INeuralNetwork;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetwork;
-import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.SaveWeights;
+import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.SaveReadWeights;
 
 public class NumberNeuralNetwork {
 
     private final INeuralNetwork neuralNetwork;
-    private final SaveWeights saveWeights = new SaveWeights();
+    private final SaveReadWeights saveWeights = new SaveReadWeights();
 
 
     public NumberNeuralNetwork(INeuralNetwork neuralNetwork) {

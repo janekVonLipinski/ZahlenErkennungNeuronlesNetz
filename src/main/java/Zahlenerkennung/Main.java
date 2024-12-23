@@ -1,10 +1,11 @@
 package Zahlenerkennung;
 
+import Matrizen.IMatrix;
 import Vektor.IVektor;
 import Vektor.Vektor;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetwork;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.ActivationFunction.SigmoidFunction;
-import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.SaveWeights;
+import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.SaveReadWeights;
 
 import java.util.List;
 
@@ -28,7 +29,8 @@ public class Main {
 
         neuralNetwork.train(inputVektor, res, 100000,  1.0);
 
-        SaveWeights saveWeights = new SaveWeights();
-        saveWeights.saveWeights(neuralNetwork);
+        SaveReadWeights saveWeights = new SaveReadWeights();
+        //saveWeights.saveWeights(neuralNetwork);
+        List<IMatrix> m = saveWeights.readMatrix();
     }
 }
