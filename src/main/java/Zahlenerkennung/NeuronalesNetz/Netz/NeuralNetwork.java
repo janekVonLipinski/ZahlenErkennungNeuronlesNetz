@@ -11,12 +11,12 @@ import java.util.List;
 
 public class NeuralNetwork implements INeuralNetwork {
 
-    private final List<LayerConnection> weights;
+    private final List<LayerConnection> layersConnections;
     private final IActivationFunction activationFunction;
 
     public NeuralNetwork(List<double[][]> weights, IActivationFunction activationFunction) {
         this.activationFunction = activationFunction;
-        this.weights = weights.stream()
+        this.layersConnections = weights.stream()
                 .map(weight -> new LayerConnection(weight, activationFunction))
                 .toList();
     }
@@ -30,7 +30,7 @@ public class NeuralNetwork implements INeuralNetwork {
             IVektor squaredDifference = calculateSquaredDifference(expectedVector, outputVector);
             IVektor errorVector = backPropagate(squaredDifference);
 
-            for (LayerConnection connection : weights) {
+            for (LayerConnection connection : layersConnections) {
                 connection.improveWeights(learningRate);
             }
         }
@@ -40,7 +40,7 @@ public class NeuralNetwork implements INeuralNetwork {
     public IVektor calculate(IVektor inputVector) {
         IVektor nextOutputVector = inputVector;
 
-        for (LayerConnection layer : weights) {
+        for (LayerConnection layer : layersConnections) {
 
             nextOutputVector = layer.calculateOutputVector(nextOutputVector);
             nextOutputVector = new Vektor(
@@ -56,7 +56,8 @@ public class NeuralNetwork implements INeuralNetwork {
     public IVektor backPropagate(IVektor outputVector) {
         IVektor errorVector = outputVector;
 
-        for (LayerConnection connection : weights) {
+        for (int i = layersConnections.size() - 1; i >= 0; i--) {
+            LayerConnection connection = layersConnections.get(i);
             errorVector = connection.backPropagateError(errorVector);
         }
 
@@ -72,7 +73,7 @@ public class NeuralNetwork implements INeuralNetwork {
         );
     }
 
-    public List<LayerConnection> getWeights() {
-        return weights;
+    public List<LayerConnection> getLayersConnections() {
+        return layersConnections;
     }
 }

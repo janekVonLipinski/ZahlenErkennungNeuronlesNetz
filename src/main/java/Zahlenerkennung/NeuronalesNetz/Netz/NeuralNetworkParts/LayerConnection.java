@@ -21,9 +21,6 @@ public class LayerConnection {
         transposedWeightMatrix = weightMatrix.transponiere();
         sigmoid = activationFunction;
     }
-    public IVektor getError() {
-        return error;
-    }
 
     public IMatrix getTransposedWeightMatrix() {
         return transposedWeightMatrix;
