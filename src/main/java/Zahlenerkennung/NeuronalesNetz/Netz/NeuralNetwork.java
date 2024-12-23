@@ -1,8 +1,10 @@
 package Zahlenerkennung.NeuronalesNetz.Netz;
 
+import Matrizen.IMatrix;
 import Vektor.IVektor;
 import Vektor.Vektor;
 import Zahlenerkennung.NeuronalesNetz.INeuralNetwork;
+import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.ActivationFunction.SigmoidFunction;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.IActivationFunction;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.LayerConnection;
 
@@ -12,12 +14,16 @@ import java.util.List;
 public class NeuralNetwork implements INeuralNetwork {
 
     private final List<LayerConnection> layersConnections;
-    private final IActivationFunction activationFunction;
 
     public NeuralNetwork(List<double[][]> weights, IActivationFunction activationFunction) {
-        this.activationFunction = activationFunction;
         this.layersConnections = weights.stream()
                 .map(weight -> new LayerConnection(weight, activationFunction))
+                .toList();
+    }
+    //TODO write a better constructor
+    public NeuralNetwork(List<IMatrix> weights) {
+        this.layersConnections = weights.stream()
+                .map(weight -> new LayerConnection(weight, new SigmoidFunction()))
                 .toList();
     }
 
@@ -41,13 +47,7 @@ public class NeuralNetwork implements INeuralNetwork {
         IVektor nextOutputVector = inputVector;
 
         for (LayerConnection layer : layersConnections) {
-
             nextOutputVector = layer.calculateOutputVector(nextOutputVector);
-            nextOutputVector = new Vektor(
-                    Arrays.stream(nextOutputVector.getVektor())
-                            .map(activationFunction::function)
-                            .toArray()
-            );
         }
 
         return nextOutputVector;

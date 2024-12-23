@@ -1,12 +1,7 @@
 package Zahlenerkennung;
 
-import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetwork;
-import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.ActivationFunction.SigmoidFunction;
 import Zahlenerkennung.ZahlenErkennungsNetz.NumberNeuralNetwork;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.InitializeNetwork;
 
 public class Main {
 
@@ -30,27 +25,12 @@ public class Main {
         //neuralNetwork.train(inputVektor, res, 100000,  1.0);
         */
 
-        double[][] firstLayer = fillMatrix(128, 784);
-        double[][] secondLayer = fillMatrix(56, 128);
-        double[][] thirdLayer = fillMatrix(10, 56);
 
-        NeuralNetwork neuralNetwork = new NeuralNetwork(
-                List.of(firstLayer, secondLayer, thirdLayer),
-                new SigmoidFunction()
-        );
+        InitializeNetwork initializeNetwork = new InitializeNetwork();
+        initializeNetwork.initializeMatrix();
 
+        NumberNeuralNetwork n = new NumberNeuralNetwork();
 
-        NumberNeuralNetwork n = new NumberNeuralNetwork(neuralNetwork);
-        n.learn();
-    }
-
-
-    private static double[][] fillMatrix(int x, int y) {
-        Random random = new Random();
-        double[][] arr = new double[x][y];
-        for (double[] row : arr) {
-            Arrays.fill(row, random.nextDouble(0, 1.0));
-        }
-        return arr;
+        //n.trainAndTestNetwork(20);
     }
 }

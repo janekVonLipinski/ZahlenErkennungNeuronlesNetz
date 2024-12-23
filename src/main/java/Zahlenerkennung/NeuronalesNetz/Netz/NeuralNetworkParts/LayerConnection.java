@@ -22,8 +22,10 @@ public class LayerConnection {
         sigmoid = activationFunction;
     }
 
-    public IMatrix getTransposedWeightMatrix() {
-        return transposedWeightMatrix;
+    public LayerConnection(IMatrix weights, IActivationFunction activationFunction) {
+        weightMatrix = weights;
+        transposedWeightMatrix = weightMatrix.transponiere();
+        sigmoid = activationFunction;
     }
 
     public IMatrix getWeightMatrix() {
@@ -32,7 +34,12 @@ public class LayerConnection {
 
     public IVektor calculateOutputVector(IVektor inputVektor) {
 
-        IVektor outputVector = inputVektor.multipliziere(weightMatrix);
+        IVektor outputVector = new Vektor(Arrays.stream(
+                inputVektor.multipliziere(weightMatrix).getVektor())
+                .map(sigmoid::function)
+                .toArray()
+        );
+
         inputFromPrevLayerWithoutSigmoid = inputVektor;
         outputOfThisLayer = outputVector;
 

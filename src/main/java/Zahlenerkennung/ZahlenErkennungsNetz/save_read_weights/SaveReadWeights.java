@@ -2,7 +2,7 @@ package Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights;
 
 import Matrizen.IMatrix;
 import Matrizen.MatrixImplementierung.Matrix;
-import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetwork;
+import Zahlenerkennung.NeuronalesNetz.INeuralNetwork;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.LayerConnection;
 
 import java.io.*;
@@ -13,18 +13,22 @@ import java.util.stream.Collectors;
 public class SaveReadWeights {
 
     private static final String FILE_LOCATION = "ZahlenErkennungNeuronlesNetz/src/main/resources/weights";
-    private static final String FILE_NAME = "weights.txt";
 
     /**
      * @param neuralNetwork saves a Neural Network to a txt File. Values of a Matrix within a row
      *                      are comma seperated, rows are seperated by semicolon.
      *                      Different matrices are seperated by empty row
      */
-    public void saveWeights(NeuralNetwork neuralNetwork) {
-
-        List<LayerConnection> weights = neuralNetwork.getLayersConnections();
-        String weightsToSave = weights.stream()
+    public void saveWeights(INeuralNetwork neuralNetwork, String fileNameExtension) {
+        List<IMatrix> weights = neuralNetwork.getLayersConnections().stream()
                 .map(LayerConnection::getWeightMatrix)
+                .toList();
+
+        saveWeights(weights, fileNameExtension);
+    }
+
+    public void saveWeights(List<IMatrix> weights, String fileName) {
+        String weightsToSave = weights.stream()
                 .map(Object::toString)
                 .map(string -> string + "\n")
                 .collect(Collectors.joining());
@@ -33,7 +37,7 @@ public class SaveReadWeights {
         weightsToSave = weightsToSave.replace("]", "");
 
         try (BufferedWriter writer = new BufferedWriter(
-                new FileWriter(FILE_LOCATION + "/" + FILE_NAME)
+                new FileWriter(FILE_LOCATION + "/" + fileName + ".txt")
         )) {
             writer.write(weightsToSave);
         } catch (IOException ioe) {
@@ -41,12 +45,12 @@ public class SaveReadWeights {
         }
     }
 
-    public List<IMatrix> readMatrix() {
+    public List<IMatrix> readMatrix(String fileName) {
 
         List<IMatrix> matrices = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(
-                new FileReader(FILE_LOCATION + "/" + FILE_NAME)
+                new FileReader(FILE_LOCATION + "/" + fileName + ".txt")
         )) {
 
             List<String> read = reader.lines().toList();
