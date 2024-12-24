@@ -45,6 +45,18 @@ public class SaveReadWeights {
         }
     }
 
+    public void write(String content) {
+
+
+        try (BufferedWriter writer = new BufferedWriter(
+                new FileWriter(FILE_LOCATION + "/" + "result" + ".txt")
+        )) {
+            writer.write(content);
+        } catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
+        }
+    }
+
     public List<IMatrix> readMatrix(String fileName) {
 
         List<IMatrix> matrices = new ArrayList<>();

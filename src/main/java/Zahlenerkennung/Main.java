@@ -2,6 +2,7 @@ package Zahlenerkennung;
 
 import Zahlenerkennung.ZahlenErkennungsNetz.NumberNeuralNetwork;
 import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.InitializeNetwork;
+import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.SaveReadWeights;
 
 public class Main {
 
@@ -25,12 +26,51 @@ public class Main {
         //neuralNetwork.train(inputVektor, res, 100000,  1.0);
         */
 
+        int i = 0;
+        String returnString = "";
 
-        InitializeNetwork initializeNetwork = new InitializeNetwork();
-        initializeNetwork.initializeMatrix();
+        for (double learningRate = 0.1; learningRate <= 1; learningRate += 0.1) {
 
-        NumberNeuralNetwork n = new NumberNeuralNetwork();
+            String fileName = "weights%d".formatted(i);
 
-        //n.trainAndTestNetwork(20);
+            InitializeNetwork initializeNetwork = new InitializeNetwork();
+            initializeNetwork.initializeMatrix(fileName);
+            NumberNeuralNetwork n = new NumberNeuralNetwork(fileName);
+
+            double successRate = n.trainAndTestNetwork(20, learningRate, fileName);
+
+            returnString += learningRate;
+            returnString += " with successRate: ";
+            returnString += successRate;
+            returnString += "\n";
+
+            i++;
+        }
+
+        SaveReadWeights saveReadWeights = new SaveReadWeights();
+        saveReadWeights.write(returnString);
+
+        /*
+        SaveReadWeights saveReadWeights = new SaveReadWeights();
+
+        NumberNeuralNetwork network = new NumberNeuralNetwork("weights1");
+        NumberNeuralNetwork network3 = new NumberNeuralNetwork("weights3");
+        NumberNeuralNetwork network5 = new NumberNeuralNetwork("weights5");
+
+        System.out.println("Initialized network correctly");
+
+        Picture[] pictures = network.readPictures();
+
+        System.out.println("network 1\n");
+        network.testNeuralNetwork(pictures);
+
+
+        System.out.println("network 3\n");
+        network3.testNeuralNetwork(pictures);
+
+
+        System.out.println("network 5\n");
+        network5.testNeuralNetwork(pictures);
+        */
     }
 }

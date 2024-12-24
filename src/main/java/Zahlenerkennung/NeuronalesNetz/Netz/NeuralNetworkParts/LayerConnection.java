@@ -12,9 +12,9 @@ public class LayerConnection {
     private IMatrix weightMatrix;
     private IMatrix transposedWeightMatrix;
     private final IActivationFunction sigmoid;
-    private IVektor outputOfThisLayer;
+    private IVektor outputOfThisLayerWithoutSigmoid;
     private IVektor error;
-    private IVektor inputFromPrevLayerWithoutSigmoid;
+    private IVektor inputFromPrevLayer;
 
     public LayerConnection(double[][] weights, IActivationFunction activationFunction) {
         weightMatrix = new Matrix(weights);
@@ -34,37 +34,29 @@ public class LayerConnection {
 
     public IVektor calculateOutputVector(IVektor inputVektor) {
 
-        IVektor outputVector = new Vektor(Arrays.stream(
-                inputVektor.multipliziere(weightMatrix).getVektor())
-                .map(sigmoid::function)
+        IVektor outputVector = new Vektor(
+                Arrays.stream(inputVektor.multipliziere(weightMatrix).getVektor())
+//                .map(sigmoid::function)
                 .toArray()
         );
 
-        inputFromPrevLayerWithoutSigmoid = inputVektor;
-        outputOfThisLayer = outputVector;
+        inputFromPrevLayer = inputVektor;
+        outputOfThisLayerWithoutSigmoid = outputVector;
 
         return outputVector;
     }
 
     public IVektor backPropagateError(IVektor nextLayerOutputVector) {
-        error = nextLayerOutputVector.multipliziere(transposedWeightMatrix);
-        return error;
+        error = nextLayerOutputVector;
+        return error.multipliziere(transposedWeightMatrix);
     }
 
     public IMatrix improveWeights(double learningRate) {
 
-        Vektor inputWithSigmoid = new Vektor (
-                Arrays.stream(inputFromPrevLayerWithoutSigmoid.getVektor())
-                        .map(sigmoid::function)
-                        .toArray()
-        );
-
-        IMatrix transposedError = inputWithSigmoid.transformiereVektorInMatrix();
-
-        IMatrix transposedVector = transposedError.transponiere();
+        IMatrix input = inputFromPrevLayer.transformiereVektorInMatrix();
+        IMatrix transposedInputVector = input.transponiere();
         IMatrix change = calculateErrorVector(learningRate);
-
-        IMatrix changeMatrix = change.multipliziere(transposedVector);
+        IMatrix changeMatrix = change.multipliziere(transposedInputVector);
 
         weightMatrix = weightMatrix.subtrahiere(changeMatrix);
         transposedWeightMatrix = weightMatrix.transponiere();
@@ -72,24 +64,22 @@ public class LayerConnection {
     }
 
     private IMatrix calculateErrorVector(double learningRate) {
-        double[] outputFromThisLayerArray = outputOfThisLayer.getVektor();
+
+        double[] outputFromThisLayerArray = outputOfThisLayerWithoutSigmoid.getVektor();
+        double[] errorVector = error.getVektor();
         double[] changeArray = new double[outputFromThisLayerArray.length];
-        double[] inputFromPrevLayer = inputFromPrevLayerWithoutSigmoid.getVektor();
 
         for (int i = 0; i < outputFromThisLayerArray.length; i++) {
-
             double value = outputFromThisLayerArray[i];
-            double errorValue = error.getVektor()[i];
-
-            double newValue = calculateDerivation(errorValue, value, learningRate);
-            changeArray[i] = newValue;
+            double newValue = calculateDerivation(errorVector[i], value);
+            changeArray[i] = newValue * learningRate;
         }
 
         IVektor changeVector = new Vektor(changeArray);
         return changeVector.transformiereVektorInMatrix();
     }
 
-    private double calculateDerivation(double error, double output, double learningRate) {
-        return -learningRate * error * output * (1 - output);
+    private double calculateDerivation(double error, double output) {
+        return error * sigmoid.function(output) * sigmoid.function(1 - output);
     }
 }

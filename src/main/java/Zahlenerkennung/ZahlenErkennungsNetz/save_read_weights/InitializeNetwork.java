@@ -11,14 +11,14 @@ public class InitializeNetwork {
 
     private final SaveReadWeights saveReadWeights = new SaveReadWeights();
 
-    public void initializeMatrix() {
+    public void initializeMatrix(String fileName) {
 
         //TODO values should not be hardcoded
         IMatrix firstLayer = generateRandomLayer( 128, 784);
         IMatrix secondLayer = generateRandomLayer(56, 128);
         IMatrix thirdLayer = generateRandomLayer(10, 56);
 
-        saveReadWeights.saveWeights(List.of(firstLayer, secondLayer, thirdLayer), "weights0");
+        saveReadWeights.saveWeights(List.of(firstLayer, secondLayer, thirdLayer), fileName);
     }
 
 

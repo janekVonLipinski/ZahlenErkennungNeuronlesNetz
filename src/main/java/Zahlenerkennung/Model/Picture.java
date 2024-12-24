@@ -26,6 +26,23 @@ public class Picture {
         return rowOffset;
     }
 
+    public void printPicture() {
+
+        for (int i = 0; i < pixel.length; i++) {
+
+            if (i % rowOffset == 0) {
+                System.out.println("\n");
+            }
+
+            if (pixel[i] > 0) {
+                System.out.print("+");
+            } else {
+                System.out.print("-");
+            }
+
+        }
+    }
+
     @Override
     public String toString() {
         return "Bild{" +
