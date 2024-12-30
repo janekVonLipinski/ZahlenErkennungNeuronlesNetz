@@ -1,6 +1,6 @@
-package Zahlenerkennung.reader;
+package Zahlenerkennung.model;
 
-import Zahlenerkennung.Model.Picture;
+import Zahlenerkennung.model.Picture;
 
 import java.io.FileInputStream;
 import java.io.IOException;

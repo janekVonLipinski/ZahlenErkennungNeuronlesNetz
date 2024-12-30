@@ -1,9 +1,9 @@
-package Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights;
+package Zahlenerkennung.number_detection_net.save_read_weights;
 
 import Matrizen.IMatrix;
 import Matrizen.MatrixImplementierung.Matrix;
-import Zahlenerkennung.NeuronalesNetz.INeuralNetwork;
-import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetworkParts.LayerConnection;
+import Zahlenerkennung.number_detection_net.mathematical_neural_net.INeuralNetwork;
+import Zahlenerkennung.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts.LayerConnection;
 
 import java.io.*;
 import java.util.ArrayList;

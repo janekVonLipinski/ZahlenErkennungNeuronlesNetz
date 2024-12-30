@@ -1,4 +1,4 @@
-package Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights;
+package Zahlenerkennung.number_detection_net.save_read_weights;
 
 import Matrizen.IMatrix;
 import Matrizen.MatrixImplementierung.Matrix;

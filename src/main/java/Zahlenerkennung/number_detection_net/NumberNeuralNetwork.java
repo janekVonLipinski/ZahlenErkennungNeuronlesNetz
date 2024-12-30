@@ -1,14 +1,14 @@
-package Zahlenerkennung.ZahlenErkennungsNetz;
+package Zahlenerkennung.number_detection_net;
 
 import Matrizen.IMatrix;
 import Vektor.IVektor;
 import Vektor.Vektor;
-import Zahlenerkennung.Model.Picture;
-import Zahlenerkennung.NeuronalesNetz.INeuralNetwork;
-import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetwork;
-import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.InitializeNetwork;
-import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.SaveReadWeights;
-import Zahlenerkennung.reader.InputReader;
+import Zahlenerkennung.model.Picture;
+import Zahlenerkennung.number_detection_net.mathematical_neural_net.INeuralNetwork;
+import Zahlenerkennung.number_detection_net.mathematical_neural_net.Netz.NeuralNetwork;
+import Zahlenerkennung.number_detection_net.save_read_weights.InitializeNetwork;
+import Zahlenerkennung.number_detection_net.save_read_weights.SaveReadWeights;
+import Zahlenerkennung.model.InputReader;
 
 import java.io.IOException;
 import java.util.Arrays;
