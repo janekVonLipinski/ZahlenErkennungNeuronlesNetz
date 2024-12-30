@@ -1,5 +1,6 @@
 package number_detection;
 
+import number_detection.model.Picture;
 import number_detection.number_detection_net.NumberNeuralNetwork;
 
 import java.util.List;
@@ -10,8 +11,9 @@ public class Main {
 
         List<Integer> ints = List.of(784, 128, 56, 10);
         NumberNeuralNetwork neuralNetwork = new NumberNeuralNetwork(ints, "initializedWeights");
+        Picture[] arr = {};
         double successRate = neuralNetwork.trainAndTestNetwork(
-                20, 0.01, "weightsAfterTraining");
+                arr, 20, 0.01, "weightsAfterTraining");
         System.out.println(successRate);
     }
 
