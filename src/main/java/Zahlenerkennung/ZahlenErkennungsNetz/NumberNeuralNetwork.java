@@ -6,6 +6,7 @@ import Vektor.Vektor;
 import Zahlenerkennung.Model.Picture;
 import Zahlenerkennung.NeuronalesNetz.INeuralNetwork;
 import Zahlenerkennung.NeuronalesNetz.Netz.NeuralNetwork;
+import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.InitializeNetwork;
 import Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights.SaveReadWeights;
 import Zahlenerkennung.reader.InputReader;
 
@@ -19,7 +20,7 @@ public class NumberNeuralNetwork {
     private static final String IMAGE_PATH = "ZahlenErkennungNeuronlesNetz/src/main/resources/train-images.idx3-ubyte";
     private final InputReader inputReader = new InputReader();
     private final SaveReadWeights saveReadWeights = new SaveReadWeights();
-    private INeuralNetwork neuralNetwork;
+    private final INeuralNetwork neuralNetwork;
 
 
     public NumberNeuralNetwork(INeuralNetwork neuralNetwork) {
@@ -28,45 +29,35 @@ public class NumberNeuralNetwork {
 
     public NumberNeuralNetwork(String fileName) {
         List<IMatrix> weights = saveReadWeights.readMatrix(fileName);
-        neuralNetwork = new NeuralNetwork(weights);
+        this.neuralNetwork = new NeuralNetwork(weights);
+    }
+
+    public NumberNeuralNetwork(List<Integer> neuronsPerLayer, String fileName) {
+
+        InitializeNetwork initializeNetwork = new InitializeNetwork();
+        List<IMatrix> weights = initializeNetwork.initializeMatrices(fileName, neuronsPerLayer);
+        this.neuralNetwork = new NeuralNetwork(weights);
     }
 
     public double trainAndTestNetwork(int numberOfIterations, double learningRate, String fileName) {
 
-        System.out.println("reading pictures");
         Picture[] pictures = readPictures();
-
-        double successRate = 0;
-
-        for (int i = 1; i < numberOfIterations; i++) {
-
-            System.out.println("training network");
-            learn(pictures, learningRate, fileName);
-
-            System.out.println("evaluating network");
-            successRate = testNeuralNetwork(pictures);
-        }
+        trainNetworkOverIterations(numberOfIterations, learningRate, pictures);
+        double successRate = testNeuralNetwork(pictures);
+        saveReadWeights.saveWeights(neuralNetwork, fileName);
 
         return successRate;
     }
 
-    public void learn(Picture[] pictures, double learningRate, String fileName) {
+    private void trainNetworkOverIterations(int numberOfIterations, double learningRate, Picture[] pictures) {
 
-        System.out.println("reading weights");
-
-        List<IMatrix> weights = saveReadWeights.readMatrix(fileName);
-        neuralNetwork = new NeuralNetwork(weights);
-
-        for (Picture picture : pictures) {
-            trainNetworkWith(picture, learningRate);
+        for (int i = 1; i < numberOfIterations; i++) {
+            learn(pictures, learningRate);
         }
-
-        System.out.println("saving weights");
-
-        saveReadWeights.saveWeights(neuralNetwork, fileName);
     }
 
     public Picture[] readPictures() {
+
         Picture[] pictures = {};
 
         try {
@@ -77,12 +68,17 @@ public class NumberNeuralNetwork {
         return pictures;
     }
 
+    public void learn(Picture[] pictures, double learningRate) {
+
+        for (Picture picture : pictures) {
+            trainNetworkWith(picture, learningRate);
+        }
+    }
+
     public double testNeuralNetwork(Picture[] pictures) {
 
-        System.out.println("evaluating network");
-
-        double count = 0;
-        double good = 0;
+        double totalEvaluatedNumbers = 0;
+        double correctlyDetectedNumbers = 0;
 
         for (Picture picture : pictures) {
 
@@ -90,26 +86,34 @@ public class NumberNeuralNetwork {
             IVektor outPutCalculatedByNeuralNetwork = neuralNetwork.calculate(pictureVector);
             double[] values = outPutCalculatedByNeuralNetwork.getVektor();
 
-            double highest = 0;
-            int index = -1;
+            int detectedNumber = getBestFit(values);
 
-            for (int i = 0; i < values.length; i++) {
-
-                double value = values[i];
-
-                if (value > highest) {
-                    highest = value;
-                    index = i;
-                }
+            if (detectedNumber == picture.getLabel()) {
+                correctlyDetectedNumbers++;
             }
 
-            if (index == picture.getLabel()) {
-                good++;
-            }
-            count++;
+            totalEvaluatedNumbers++;
         }
 
-        return good / count;
+        return correctlyDetectedNumbers / totalEvaluatedNumbers;
+    }
+
+    private int getBestFit(double[] values) {
+
+        double highest = 0;
+        int index = -1;
+
+        for (int i = 0; i < values.length; i++) {
+
+            double value = values[i];
+
+            if (value > highest) {
+                highest = value;
+                index = i;
+            }
+        }
+
+        return index;
     }
 
     private void trainNetworkWith(Picture picture, double learningRate) {
@@ -121,7 +125,7 @@ public class NumberNeuralNetwork {
 
     private IVektor convertLabelToVector(Picture picture) {
 
-        int numberOfNumbers = 10; //most based name, i ever came up with
+        int numberOfNumbers = 10; //most based name, I ever came up with
         double[] numbers = new double[numberOfNumbers];
         int label = picture.getLabel();
         numbers[label] = 1;
@@ -130,10 +134,10 @@ public class NumberNeuralNetwork {
     }
 
     private IVektor convertPictureToVectorAndNormalize(Picture picture) {
-        double[] pictureOfDoubles = Arrays.stream(picture.getPixel())
+        double[] normalizedPictures = Arrays.stream(picture.getPixel())
                 .mapToDouble(i -> i / 255.0)
                 .toArray();
 
-        return new Vektor(pictureOfDoubles);
+        return new Vektor(normalizedPictures);
     }
 }

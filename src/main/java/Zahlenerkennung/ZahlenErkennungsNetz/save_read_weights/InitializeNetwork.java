@@ -3,22 +3,29 @@ package Zahlenerkennung.ZahlenErkennungsNetz.save_read_weights;
 import Matrizen.IMatrix;
 import Matrizen.MatrixImplementierung.Matrix;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class InitializeNetwork {
 
-
     private final SaveReadWeights saveReadWeights = new SaveReadWeights();
 
-    public void initializeMatrix(String fileName) {
+    public List<IMatrix> initializeMatrices(String fileName, List<Integer> neuronsPerLayer) {
 
-        //TODO values should not be hardcoded
-        IMatrix firstLayer = generateRandomLayer( 128, 784);
-        IMatrix secondLayer = generateRandomLayer(56, 128);
-        IMatrix thirdLayer = generateRandomLayer(10, 56);
+        List<IMatrix> weights = new ArrayList<>();
 
-        saveReadWeights.saveWeights(List.of(firstLayer, secondLayer, thirdLayer), fileName);
+        for (int i = 0; i < neuronsPerLayer.size() - 1; i++) {
+
+            int inputNodes = neuronsPerLayer.get(i);
+            int outPutNodes = neuronsPerLayer.get(i + 1);
+
+            IMatrix matrix = generateRandomLayer(outPutNodes, inputNodes);
+            weights.add(matrix);
+        }
+
+        saveReadWeights.saveWeights(weights, fileName);
+        return weights;
     }
 
 
