@@ -1,8 +1,8 @@
-package Zahlenerkennung.number_detection_net.mathematical_neural_net;
+package number_detection.number_detection_net.mathematical_neural_net;
 
 import Matrizen.IMatrix;
 import Vektor.IVektor;
-import Zahlenerkennung.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts.LayerConnection;
+import number_detection.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts.LayerConnection;
 
 import java.util.List;
 

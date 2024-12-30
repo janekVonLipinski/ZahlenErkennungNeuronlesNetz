@@ -1,6 +1,6 @@
-package Zahlenerkennung;
+package number_detection;
 
-import Zahlenerkennung.number_detection_net.NumberNeuralNetwork;
+import number_detection.number_detection_net.NumberNeuralNetwork;
 
 import java.util.List;
 

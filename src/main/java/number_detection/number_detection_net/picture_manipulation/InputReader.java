@@ -1,6 +1,6 @@
-package Zahlenerkennung.model;
+package number_detection.number_detection_net.picture_manipulation;
 
-import Zahlenerkennung.model.Picture;
+import number_detection.model.Picture;
 
 import java.io.FileInputStream;
 import java.io.IOException;

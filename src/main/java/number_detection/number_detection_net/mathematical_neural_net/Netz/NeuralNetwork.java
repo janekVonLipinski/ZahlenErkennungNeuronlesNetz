@@ -1,12 +1,12 @@
-package Zahlenerkennung.number_detection_net.mathematical_neural_net.Netz;
+package number_detection.number_detection_net.mathematical_neural_net.Netz;
 
 import Matrizen.IMatrix;
 import Vektor.IVektor;
 import Vektor.Vektor;
-import Zahlenerkennung.number_detection_net.mathematical_neural_net.INeuralNetwork;
-import Zahlenerkennung.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts.ActivationFunction.SigmoidFunction;
-import Zahlenerkennung.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts.IActivationFunction;
-import Zahlenerkennung.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts.LayerConnection;
+import number_detection.number_detection_net.mathematical_neural_net.INeuralNetwork;
+import number_detection.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts.ActivationFunction.SigmoidFunction;
+import number_detection.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts.IActivationFunction;
+import number_detection.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts.LayerConnection;
 
 import java.util.Arrays;
 import java.util.List;

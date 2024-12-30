@@ -1,4 +1,4 @@
-package Zahlenerkennung.model;
+package number_detection.model;
 
 import java.util.Arrays;
 

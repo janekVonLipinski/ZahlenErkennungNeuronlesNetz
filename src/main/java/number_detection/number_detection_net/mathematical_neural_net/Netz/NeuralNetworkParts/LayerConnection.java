@@ -1,4 +1,4 @@
-package Zahlenerkennung.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts;
+package number_detection.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts;
 
 import Matrizen.IMatrix;
 import Matrizen.MatrixImplementierung.Matrix;

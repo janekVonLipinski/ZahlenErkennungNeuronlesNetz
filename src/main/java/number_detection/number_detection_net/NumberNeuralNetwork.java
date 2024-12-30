@@ -1,24 +1,19 @@
-package Zahlenerkennung.number_detection_net;
+package number_detection.number_detection_net;
 
 import Matrizen.IMatrix;
 import Vektor.IVektor;
 import Vektor.Vektor;
-import Zahlenerkennung.model.Picture;
-import Zahlenerkennung.number_detection_net.mathematical_neural_net.INeuralNetwork;
-import Zahlenerkennung.number_detection_net.mathematical_neural_net.Netz.NeuralNetwork;
-import Zahlenerkennung.number_detection_net.save_read_weights.InitializeNetwork;
-import Zahlenerkennung.number_detection_net.save_read_weights.SaveReadWeights;
-import Zahlenerkennung.model.InputReader;
+import number_detection.model.Picture;
+import number_detection.number_detection_net.mathematical_neural_net.INeuralNetwork;
+import number_detection.number_detection_net.mathematical_neural_net.Netz.NeuralNetwork;
+import number_detection.number_detection_net.save_read_weights.InitializeNetwork;
+import number_detection.number_detection_net.save_read_weights.SaveReadWeights;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public class NumberNeuralNetwork {
 
-    private static final String LABEL_PATH = "ZahlenErkennungNeuronlesNetz/src/main/resources/train-labels.idx1-ubyte";
-    private static final String IMAGE_PATH = "ZahlenErkennungNeuronlesNetz/src/main/resources/train-images.idx3-ubyte";
-    private final InputReader inputReader = new InputReader();
     private final SaveReadWeights saveReadWeights = new SaveReadWeights();
     private final INeuralNetwork neuralNetwork;
 
@@ -39,9 +34,8 @@ public class NumberNeuralNetwork {
         this.neuralNetwork = new NeuralNetwork(weights);
     }
 
-    public double trainAndTestNetwork(int numberOfIterations, double learningRate, String fileName) {
+    public double trainAndTestNetwork(Picture[] pictures, int numberOfIterations, double learningRate, String fileName) {
 
-        Picture[] pictures = readPictures();
         trainNetworkOverIterations(numberOfIterations, learningRate, pictures);
         double successRate = testNeuralNetwork(pictures);
         saveReadWeights.saveWeights(neuralNetwork, fileName);
@@ -54,18 +48,6 @@ public class NumberNeuralNetwork {
         for (int i = 1; i < numberOfIterations; i++) {
             learn(pictures, learningRate);
         }
-    }
-
-    public Picture[] readPictures() {
-
-        Picture[] pictures = {};
-
-        try {
-            pictures = inputReader.getImages(LABEL_PATH, IMAGE_PATH);
-        } catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
-        }
-        return pictures;
     }
 
     public void learn(Picture[] pictures, double learningRate) {

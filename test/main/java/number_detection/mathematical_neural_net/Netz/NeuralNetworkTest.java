@@ -1,11 +1,11 @@
-package Zahlenerkennung.mathematical_neural_net.Netz;
+package number_detection.mathematical_neural_net.Netz;
 
 import Matrizen.IMatrix;
 import Matrizen.MatrixImplementierung.Matrix;
 import Vektor.IVektor;
 import Vektor.Vektor;
-import Zahlenerkennung.number_detection_net.mathematical_neural_net.Netz.NeuralNetwork;
-import Zahlenerkennung.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts.ActivationFunction.SigmoidFunction;
+import number_detection.number_detection_net.mathematical_neural_net.Netz.NeuralNetwork;
+import number_detection.number_detection_net.mathematical_neural_net.Netz.NeuralNetworkParts.ActivationFunction.SigmoidFunction;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
