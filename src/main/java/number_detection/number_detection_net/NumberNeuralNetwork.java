@@ -16,11 +16,8 @@ public class NumberNeuralNetwork {
 
     private final SaveReadWeights saveReadWeights = new SaveReadWeights();
     private final INeuralNetwork neuralNetwork;
+    private final PictureInput pictureInput = new PictureInput();
 
-
-    public NumberNeuralNetwork(INeuralNetwork neuralNetwork) {
-        this.neuralNetwork = neuralNetwork;
-    }
 
     public NumberNeuralNetwork(String fileName) {
         List<IMatrix> weights = saveReadWeights.readMatrix(fileName);
@@ -34,20 +31,27 @@ public class NumberNeuralNetwork {
         this.neuralNetwork = new NeuralNetwork(weights);
     }
 
-    public double trainAndTestNetwork(Picture[] pictures, int numberOfIterations, double learningRate, String fileName) {
+    public void trainAndTestNetwork(int numberOfIterations, double learningRate, String fileName, String resultLabel) {
 
-        trainNetworkOverIterations(numberOfIterations, learningRate, pictures);
-        double successRate = testNeuralNetwork(pictures);
+        Picture[] trainPictures = pictureInput.getTrainingImages();
+        Picture[] evaluationPictures = pictureInput.getEvaluationImages();
+
+        String evaluationString = trainNetworkOverIterations(numberOfIterations, learningRate, trainPictures, evaluationPictures);
         saveReadWeights.saveWeights(neuralNetwork, fileName);
-
-        return successRate;
+        saveReadWeights.write(evaluationString, resultLabel);
     }
 
-    private void trainNetworkOverIterations(int numberOfIterations, double learningRate, Picture[] pictures) {
+    private String trainNetworkOverIterations(int numberOfIterations, double learningRate, Picture[] pictures, Picture[] evaluationPictures) {
+
+        StringBuilder evaluationString = new StringBuilder();
 
         for (int i = 1; i < numberOfIterations; i++) {
             learn(pictures, learningRate);
+            double successRate = testNeuralNetwork(evaluationPictures);
+            evaluationString.append(successRate).append("\n");
         }
+
+        return evaluationString.toString();
     }
 
     public void learn(Picture[] pictures, double learningRate) {
@@ -73,6 +77,9 @@ public class NumberNeuralNetwork {
             if (detectedNumber == picture.getLabel()) {
                 correctlyDetectedNumbers++;
             }
+
+            System.out.println("output of the net for input is");
+            System.out.println(outPutCalculatedByNeuralNetwork);
 
             totalEvaluatedNumbers++;
         }

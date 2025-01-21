@@ -1,41 +1,28 @@
 package number_detection;
 
-import number_detection.model.Picture;
 import number_detection.number_detection_net.NumberNeuralNetwork;
 
 import java.util.List;
 
 public class Main {
 
+    private static final int DEFAULT_NUMBER_OF_GENERATIONS = 10;
+    private static final List<Integer> DEFAULT_NETWORK_SIZE = List.of(784, 100, 10);
+    private static final double DEFAULT_LEARNING_RATE = 0.01;
+
+
     public static void main(String[] args) {
 
-        List<Integer> ints = List.of(784, 128, 56, 10);
-        NumberNeuralNetwork neuralNetwork = new NumberNeuralNetwork(ints, "initializedWeights");
-        Picture[] arr = {};
-        double successRate = neuralNetwork.trainAndTestNetwork(
-                arr, 20, 0.01, "weightsAfterTraining");
-        System.out.println(successRate);
-    }
+        NumberNeuralNetwork neuralNetwork;
 
-    private static StringBuilder testLearnRates() {
-        int i = 0;
-        StringBuilder returnString = new StringBuilder();
-
-        for (double learningRate = 0.1; learningRate <= 1; learningRate += 0.1) {
-
-            String fileName = "weights%d".formatted(i);
-
-            NumberNeuralNetwork n = new NumberNeuralNetwork(List.of(784, 128, 56, 10), fileName);
-
-            double successRate = n.trainAndTestNetwork(20, learningRate, fileName);
-
-            returnString.append(learningRate);
-            returnString.append(" with successRate: ");
-            returnString.append(successRate);
-            returnString.append("\n");
-
-            i++;
+        if (args.length > 0) {
+            String file = args[0];
+            neuralNetwork = new NumberNeuralNetwork(file);
+        } else {
+            neuralNetwork = new NumberNeuralNetwork(DEFAULT_NETWORK_SIZE, "network");
         }
-        return returnString;
+
+        neuralNetwork.trainAndTestNetwork(DEFAULT_NUMBER_OF_GENERATIONS, DEFAULT_LEARNING_RATE, "network", "network_result");
     }
+
 }

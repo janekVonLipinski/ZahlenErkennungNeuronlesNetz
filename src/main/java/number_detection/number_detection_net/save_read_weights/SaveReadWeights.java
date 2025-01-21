@@ -45,11 +45,11 @@ public class SaveReadWeights {
         }
     }
 
-    public void write(String content) {
+    public void write(String content, String fileName) {
 
 
         try (BufferedWriter writer = new BufferedWriter(
-                new FileWriter(FILE_LOCATION + "/" + "result" + ".txt")
+                new FileWriter(FILE_LOCATION + "/" + fileName + ".txt")
         )) {
             writer.write(content);
         } catch (IOException ioe) {

@@ -36,7 +36,6 @@ public class LayerConnection {
 
         IVektor outputVector = new Vektor(
                 Arrays.stream(inputVektor.multipliziere(weightMatrix).getVektor())
-//                .map(sigmoid::function)
                 .toArray()
         );
 

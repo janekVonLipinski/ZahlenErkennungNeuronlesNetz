@@ -1,4 +1,4 @@
-package number_detection.number_detection_net.picture_manipulation;
+package number_detection.number_detection_net;
 
 import number_detection.model.Picture;
 
@@ -9,7 +9,7 @@ import java.nio.ByteBuffer;
 public class InputReader {
     private static final int NUMBER_OF_HEADER_BYTES = 4;
 
-    public int getLabel(int n, String labelFilePath) throws IOException {
+    private int getLabel(int n, String labelFilePath) throws IOException {
         try (FileInputStream fis = new FileInputStream(labelFilePath)) {
             byte[] buffer = new byte[4];
             fis.skip(NUMBER_OF_HEADER_BYTES);
@@ -23,7 +23,7 @@ public class InputReader {
         }
     }
 
-    public Picture getImage(int n, String labelFilePath, String imageFilePath) throws IOException, IllegalArgumentException {
+    private Picture getImage(int n, String labelFilePath, String imageFilePath) throws IOException, IllegalArgumentException {
         try (FileInputStream fis  = new FileInputStream(imageFilePath)) {
             byte[] buffer = new byte[4];
             fis.skip(NUMBER_OF_HEADER_BYTES);
