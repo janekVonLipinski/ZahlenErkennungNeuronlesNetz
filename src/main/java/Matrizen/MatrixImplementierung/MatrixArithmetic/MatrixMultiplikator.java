@@ -11,7 +11,13 @@ public class MatrixMultiplikator {
 
         if (m1.getAnzahlSpalten() != m2.getAnzahlZeilen()) {
             throw new IllegalArgumentException(
-                    "Zeilen von linker Matrix müssen gleich den Spalten der zweiten sein"
+                    "Zeilen von linker Matrix müssen gleich den Spalten der zweiten sein\n"
+                    + "Zeilen von Matrix 1: %d, Spalten von Matrix 1: %d\n".formatted(
+                            m1.getAnzahlZeilen(), m1.getAnzahlSpalten()
+                    )
+                    + "Zeilen von Matrix 2: %d, Spalten von Matrix 2: %d".formatted(
+                            m2.getAnzahlZeilen(), m2.getAnzahlSpalten()
+                    )
             );
         }
 
@@ -28,7 +34,7 @@ public class MatrixMultiplikator {
         for (int i = 0; i < ergebnis.getAnzahlZeilen(); i++) {
             for (int j = 0; j < ergebnis.getAnzahlSpalten(); j++) {
                 ergebnis.getMatrix()[i][j] = 0;
-                for (int k = 0; k < m1.getAnzahlZeilen(); k++) {
+                for (int k = 0; k < m1.getAnzahlSpalten(); k++) {
                     ergebnis.getMatrix()[i][j] += (m1.getMatrix()[i][k] * m2.getMatrix()[k][j]);
                 }
             }
