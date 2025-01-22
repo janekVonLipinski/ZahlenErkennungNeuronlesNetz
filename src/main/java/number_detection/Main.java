@@ -2,6 +2,7 @@ package number_detection;
 
 import number_detection.number_detection_net.NumberNeuralNetwork;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 public class Main {
@@ -12,16 +13,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-
-        NumberNeuralNetwork neuralNetwork;
-
-        if (args.length > 0) {
-            String file = args[0];
-            neuralNetwork = new NumberNeuralNetwork(file);
-        } else {
-            neuralNetwork = new NumberNeuralNetwork(DEFAULT_NETWORK_SIZE, "network");
-        }
-
+        System.out.println("Starting");
+        NumberNeuralNetwork neuralNetwork = new NumberNeuralNetwork(DEFAULT_NETWORK_SIZE, "network");
         neuralNetwork.trainAndTestNetwork(DEFAULT_NUMBER_OF_GENERATIONS, DEFAULT_LEARNING_RATE, "network", "network_result");
     }
 

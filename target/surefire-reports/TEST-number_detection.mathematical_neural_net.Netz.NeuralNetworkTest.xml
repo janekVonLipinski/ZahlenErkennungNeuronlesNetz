@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="number_detection.mathematical_neural_net.Netz.NeuralNetworkTest" time="0.147" tests="3" errors="0" skipped="0" failures="2">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\jlipinski\Desktop\java_tests\ZahlenErkennungNeuronlesNetz\target\test-classes;C:\Users\jlipinski\Desktop\java_tests\ZahlenErkennungNeuronlesNetz\target\classes;C:\Users\jlipinski\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.0\junit-jupiter-5.10.0.jar;C:\Users\jlipinski\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\jlipinski\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\jlipinski\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\jlipinski\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\jlipinski\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.0\junit-jupiter-params-5.10.0.jar;C:\Users\jlipinski\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\jlipinski\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Berlin"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="DE"/>
+    <property name="sun.boot.library.path" value="C:\Users\jlipinski\.jdks\openjdk-21.0.2\bin"/>
+    <property name="sun.java.command" value="C:\Users\jlipinski\AppData\Local\Temp\surefire15062656460395070195\surefirebooter-20250122154450136_3.jar C:\Users\jlipinski\AppData\Local\Temp\surefire15062656460395070195 2025-01-22T15-44-49_905-jvmRun1 surefire-20250122154450136_1tmp surefire_0-20250122154450136_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\jlipinski\Desktop\java_tests\ZahlenErkennungNeuronlesNetz\target\test-classes;C:\Users\jlipinski\Desktop\java_tests\ZahlenErkennungNeuronlesNetz\target\classes;C:\Users\jlipinski\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.0\junit-jupiter-5.10.0.jar;C:\Users\jlipinski\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\jlipinski\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\jlipinski\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\jlipinski\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\jlipinski\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.0\junit-jupiter-params-5.10.0.jar;C:\Users\jlipinski\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\jlipinski\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\jlipinski"/>
+    <property name="user.language" value="de"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2024-01-16"/>
+    <property name="java.home" value="C:\Users\jlipinski\.jdks\openjdk-21.0.2"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\jlipinski\Desktop\java_tests\ZahlenErkennungNeuronlesNetz"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\jlipinski\AppData\Local\Temp\surefire15062656460395070195\surefirebooter-20250122154450136_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.2+13-58"/>
+    <property name="user.name" value="jlipinski"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\jlipinski\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\JLIPIN~1\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2023.3.5"/>
+    <property name="java.version" value="21.0.2"/>
+    <property name="user.dir" value="C:\Users\jlipinski\Desktop\java_tests\ZahlenErkennungNeuronlesNetz"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\jlipinski\.jdks\openjdk-21.0.2\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\jlipinski\Downloads\helm-v3.16.3-windows-amd64\windows-amd64;C:\Users\jlipinski\AppData\Local\Programs\Python\Launcher\;C:\Users\jlipinski\AppData\Local\Microsoft\WindowsApps;C:\Users\jlipinski\jdk-21_windows-x64_bin\jdk-21.0.4\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2023.3.2\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2023.3.2\bin;;C:\Users\jlipinski\AppData\Local\Programs\Git\cmd;C:\Users\jlipinski\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\jlipinski\AppData\Roaming\npm;;C:\Program Files\liquibase;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="21.0.2+13-58"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+  </properties>
+  <testcase name="Given_values_from_the_book_Then_result_is_the_same_as_in_the_booK" classname="number_detection.mathematical_neural_net.Netz.NeuralNetworkTest" time="0.022">
+    <system-out><![CDATA[0.7263033450139793
+0.7085980724248232
+0.778097059561142
+
+]]></system-out>
+  </testcase>
+  <testcase name="GIVEN_expected_is_not_0_5_THEN_0_5_is_NOT_RETURNED" classname="number_detection.mathematical_neural_net.Netz.NeuralNetworkTest" time="0.098">
+    <failure message="array contents differ at index [0], expected: &lt;0.5&gt; but was: &lt;0.10781184099870923&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: array contents differ at index [0], expected: <0.5> but was: <0.10781184099870923>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertArrayEquals.failArraysNotEqual(AssertArrayEquals.java:440)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:323)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:147)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:143)
+	at org.junit.jupiter.api.Assertions.assertArrayEquals(Assertions.java:1418)
+	at number_detection.mathematical_neural_net.Netz.NeuralNetworkTest.GIVEN_expected_is_not_0_5_THEN_0_5_is_NOT_RETURNED(NeuralNetworkTest.java:87)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+  </testcase>
+  <testcase name="GIVEN_networkWithOneMatrix_THEN_calculationsAreCorrect" classname="number_detection.mathematical_neural_net.Netz.NeuralNetworkTest" time="0.008">
+    <failure message="array contents differ at index [0][0], expected: &lt;0.7685000000000001&gt; but was: &lt;0.7453272037634077&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: array contents differ at index [0][0], expected: <0.7685000000000001> but was: <0.7453272037634077>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertArrayEquals.failArraysNotEqual(AssertArrayEquals.java:440)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:306)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayElementsEqual(AssertArrayEquals.java:376)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:346)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:159)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:155)
+	at org.junit.jupiter.api.Assertions.assertArrayEquals(Assertions.java:1452)
+	at number_detection.mathematical_neural_net.Netz.NeuralNetworkTest.GIVEN_networkWithOneMatrix_THEN_calculationsAreCorrect(NeuralNetworkTest.java:61)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+    <system-out><![CDATA[expected: 
+
+[0.7685000000000001, 0.1864, 0.6881999999999999]
+[0.34330000000000005, 0.8755000000000001, 0.2788]
+[0.2811, 0.4918, 0.5929]
+
+actual: 
+
+[0.7453272037634077, 0.10158896677413376, 0.6671963222580446]
+[0.37322446321993236, 0.8518040337958782, 0.2839346779319594]
+[0.32174370458406115, 0.5391386682513101, 0.6130462227504366]
+
+]]></system-out>
+  </testcase>
+</testsuite>

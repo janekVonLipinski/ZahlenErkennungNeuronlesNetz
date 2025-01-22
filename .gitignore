@@ -1,13 +1,9 @@
-*.class
-
-target/
 
 # Logs
 *.log
 *.out
 
 # Package Files
-*.jar
 *.war
 *.ear
 
@@ -45,4 +41,3 @@ nbdist/
 ## Generated files
 generated-sources/
 /src/main/resources/weights/wights.txt
-/src/main/resources/weights/

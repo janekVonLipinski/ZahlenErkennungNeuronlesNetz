@@ -9,10 +9,10 @@ import java.util.Objects;
 
 public class PictureInput {
 
-    private static final String TRAIN_LABEL_PATH = "ZahlenErkennungNeuronlesNetz/src/main/resources/train-labels.idx1-ubyte";
-    private static final String TRAIN_IMAGE_PATH = "ZahlenErkennungNeuronlesNetz/src/main/resources/train-images.idx3-ubyte";
-    private static final String EVALUATION_LABEL_PATH = "ZahlenErkennungNeuronlesNetz/src/main/resources/t10k-labels.idx1-ubyte";
-    private static final String EVALUATION_IMAGE_PATH = "ZahlenErkennungNeuronlesNetz/src/main/resources/t10k-images.idx3-ubyte";
+    private static final String TRAIN_LABEL_PATH = "src/main/resources/train-labels.idx1-ubyte";
+    private static final String TRAIN_IMAGE_PATH = "src/main/resources/train-images.idx3-ubyte";
+    private static final String EVALUATION_LABEL_PATH = "src/main/resources/t10k-labels.idx1-ubyte";
+    private static final String EVALUATION_IMAGE_PATH = "src/main/resources/t10k-images.idx3-ubyte";
     private final InputReader inputReader = new InputReader();
 
     public Picture[] getEvaluationImages() {

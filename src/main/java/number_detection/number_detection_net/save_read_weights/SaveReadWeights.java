@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class SaveReadWeights {
 
-    private static final String FILE_LOCATION = "ZahlenErkennungNeuronlesNetz/src/main/resources/weights";
+    private static final String FILE_LOCATION = "src/main/resources/weights";
 
     /**
      * @param neuralNetwork saves a Neural Network to a txt File. Values of a Matrix within a row

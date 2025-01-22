@@ -1,0 +1,34 @@
+-------------------------------------------------------------------------------
+Test set: number_detection.mathematical_neural_net.Netz.NeuralNetworkTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.147 s <<< FAILURE! -- in number_detection.mathematical_neural_net.Netz.NeuralNetworkTest
+number_detection.mathematical_neural_net.Netz.NeuralNetworkTest.GIVEN_expected_is_not_0_5_THEN_0_5_is_NOT_RETURNED -- Time elapsed: 0.098 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: array contents differ at index [0], expected: <0.5> but was: <0.10781184099870923>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertArrayEquals.failArraysNotEqual(AssertArrayEquals.java:440)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:323)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:147)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:143)
+	at org.junit.jupiter.api.Assertions.assertArrayEquals(Assertions.java:1418)
+	at number_detection.mathematical_neural_net.Netz.NeuralNetworkTest.GIVEN_expected_is_not_0_5_THEN_0_5_is_NOT_RETURNED(NeuralNetworkTest.java:87)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+number_detection.mathematical_neural_net.Netz.NeuralNetworkTest.GIVEN_networkWithOneMatrix_THEN_calculationsAreCorrect -- Time elapsed: 0.008 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: array contents differ at index [0][0], expected: <0.7685000000000001> but was: <0.7453272037634077>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertArrayEquals.failArraysNotEqual(AssertArrayEquals.java:440)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:306)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayElementsEqual(AssertArrayEquals.java:376)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:346)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:159)
+	at org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:155)
+	at org.junit.jupiter.api.Assertions.assertArrayEquals(Assertions.java:1452)
+	at number_detection.mathematical_neural_net.Netz.NeuralNetworkTest.GIVEN_networkWithOneMatrix_THEN_calculationsAreCorrect(NeuralNetworkTest.java:61)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
